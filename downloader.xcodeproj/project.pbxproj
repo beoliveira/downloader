@@ -7,53 +7,53 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AF8108AD1C7D06C80065C422 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8108AC1C7D06C80065C422 /* main.m */; };
-		AF8108B01C7D06C80065C422 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8108AF1C7D06C80065C422 /* AppDelegate.m */; };
-		AF8108B31C7D06C80065C422 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8108B21C7D06C80065C422 /* MasterViewController.m */; };
-		AF8108B61C7D06C80065C422 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8108B51C7D06C80065C422 /* DetailViewController.m */; };
-		AF8108B91C7D06C80065C422 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF8108B71C7D06C80065C422 /* Main.storyboard */; };
-		AF8108BB1C7D06C80065C422 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF8108BA1C7D06C80065C422 /* Assets.xcassets */; };
-		AF8108BE1C7D06C80065C422 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF8108BC1C7D06C80065C422 /* LaunchScreen.storyboard */; };
-		AF8108C91C7D06C80065C422 /* downloaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8108C81C7D06C80065C422 /* downloaderTests.m */; };
+		9B5B816E538B1A48B103310F /* Pods_downloader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B296DFCF6DEE689B76E4AEC /* Pods_downloader.framework */; };
+		AF8108E51C7D08D80065C422 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8108E41C7D08D80065C422 /* AppDelegate.swift */; };
+		AF8108E71C7D08D80065C422 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8108E61C7D08D80065C422 /* MasterViewController.swift */; };
+		AF8108E91C7D08D80065C422 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8108E81C7D08D80065C422 /* DetailViewController.swift */; };
+		AF8108EC1C7D08D80065C422 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF8108EA1C7D08D80065C422 /* Main.storyboard */; };
+		AF8108EE1C7D08D80065C422 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF8108ED1C7D08D80065C422 /* Assets.xcassets */; };
+		AF8108F11C7D08D80065C422 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF8108EF1C7D08D80065C422 /* LaunchScreen.storyboard */; };
+		AF8108FC1C7D08D80065C422 /* downloaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8108FB1C7D08D80065C422 /* downloaderTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		AF8108C51C7D06C80065C422 /* PBXContainerItemProxy */ = {
+		AF8108F81C7D08D80065C422 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = AF8108A01C7D06C80065C422 /* Project object */;
+			containerPortal = AF8108D91C7D08D80065C422 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = AF8108A71C7D06C80065C422;
+			remoteGlobalIDString = AF8108E01C7D08D80065C422;
 			remoteInfo = downloader;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		AF8108A81C7D06C80065C422 /* downloader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = downloader.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		AF8108AC1C7D06C80065C422 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		AF8108AE1C7D06C80065C422 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		AF8108AF1C7D06C80065C422 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		AF8108B11C7D06C80065C422 /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
-		AF8108B21C7D06C80065C422 /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
-		AF8108B41C7D06C80065C422 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		AF8108B51C7D06C80065C422 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
-		AF8108B81C7D06C80065C422 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		AF8108BA1C7D06C80065C422 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		AF8108BD1C7D06C80065C422 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		AF8108BF1C7D06C80065C422 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AF8108C41C7D06C80065C422 /* downloaderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = downloaderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AF8108C81C7D06C80065C422 /* downloaderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = downloaderTests.m; sourceTree = "<group>"; };
-		AF8108CA1C7D06C80065C422 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		86605BB61FE521D1D20AB91D /* Pods-downloader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-downloader.debug.xcconfig"; path = "Pods/Target Support Files/Pods-downloader/Pods-downloader.debug.xcconfig"; sourceTree = "<group>"; };
+		9B296DFCF6DEE689B76E4AEC /* Pods_downloader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_downloader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF8108E11C7D08D80065C422 /* downloader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = downloader.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF8108E41C7D08D80065C422 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AF8108E61C7D08D80065C422 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
+		AF8108E81C7D08D80065C422 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		AF8108EB1C7D08D80065C422 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		AF8108ED1C7D08D80065C422 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AF8108F01C7D08D80065C422 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		AF8108F21C7D08D80065C422 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AF8108F71C7D08D80065C422 /* downloaderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = downloaderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF8108FB1C7D08D80065C422 /* downloaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = downloaderTests.swift; sourceTree = "<group>"; };
+		AF8108FD1C7D08D80065C422 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF95A943D6BB63B8AD389FD1 /* Pods-downloader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-downloader.release.xcconfig"; path = "Pods/Target Support Files/Pods-downloader/Pods-downloader.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		AF8108A51C7D06C80065C422 /* Frameworks */ = {
+		AF8108DE1C7D08D80065C422 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B5B816E538B1A48B103310F /* Pods_downloader.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AF8108C11C7D06C80065C422 /* Frameworks */ = {
+		AF8108F41C7D08D80065C422 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -63,69 +63,79 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AF81089F1C7D06C80065C422 = {
+		73C7A00475719A1681977AA9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				AF8108AA1C7D06C80065C422 /* downloader */,
-				AF8108C71C7D06C80065C422 /* downloaderTests */,
-				AF8108A91C7D06C80065C422 /* Products */,
+				86605BB61FE521D1D20AB91D /* Pods-downloader.debug.xcconfig */,
+				FF95A943D6BB63B8AD389FD1 /* Pods-downloader.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		AF8108D81C7D08D80065C422 = {
+			isa = PBXGroup;
+			children = (
+				AF8108E31C7D08D80065C422 /* downloader */,
+				AF8108FA1C7D08D80065C422 /* downloaderTests */,
+				AF8108E21C7D08D80065C422 /* Products */,
+				73C7A00475719A1681977AA9 /* Pods */,
+				F494EB7C33F25885A6284953 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		AF8108A91C7D06C80065C422 /* Products */ = {
+		AF8108E21C7D08D80065C422 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AF8108A81C7D06C80065C422 /* downloader.app */,
-				AF8108C41C7D06C80065C422 /* downloaderTests.xctest */,
+				AF8108E11C7D08D80065C422 /* downloader.app */,
+				AF8108F71C7D08D80065C422 /* downloaderTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		AF8108AA1C7D06C80065C422 /* downloader */ = {
+		AF8108E31C7D08D80065C422 /* downloader */ = {
 			isa = PBXGroup;
 			children = (
-				AF8108AE1C7D06C80065C422 /* AppDelegate.h */,
-				AF8108AF1C7D06C80065C422 /* AppDelegate.m */,
-				AF8108B11C7D06C80065C422 /* MasterViewController.h */,
-				AF8108B21C7D06C80065C422 /* MasterViewController.m */,
-				AF8108B41C7D06C80065C422 /* DetailViewController.h */,
-				AF8108B51C7D06C80065C422 /* DetailViewController.m */,
-				AF8108B71C7D06C80065C422 /* Main.storyboard */,
-				AF8108BA1C7D06C80065C422 /* Assets.xcassets */,
-				AF8108BC1C7D06C80065C422 /* LaunchScreen.storyboard */,
-				AF8108BF1C7D06C80065C422 /* Info.plist */,
-				AF8108AB1C7D06C80065C422 /* Supporting Files */,
+				AF8108E41C7D08D80065C422 /* AppDelegate.swift */,
+				AF8108E61C7D08D80065C422 /* MasterViewController.swift */,
+				AF8108E81C7D08D80065C422 /* DetailViewController.swift */,
+				AF8108EA1C7D08D80065C422 /* Main.storyboard */,
+				AF8108ED1C7D08D80065C422 /* Assets.xcassets */,
+				AF8108EF1C7D08D80065C422 /* LaunchScreen.storyboard */,
+				AF8108F21C7D08D80065C422 /* Info.plist */,
 			);
 			path = downloader;
 			sourceTree = "<group>";
 		};
-		AF8108AB1C7D06C80065C422 /* Supporting Files */ = {
+		AF8108FA1C7D08D80065C422 /* downloaderTests */ = {
 			isa = PBXGroup;
 			children = (
-				AF8108AC1C7D06C80065C422 /* main.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		AF8108C71C7D06C80065C422 /* downloaderTests */ = {
-			isa = PBXGroup;
-			children = (
-				AF8108C81C7D06C80065C422 /* downloaderTests.m */,
-				AF8108CA1C7D06C80065C422 /* Info.plist */,
+				AF8108FB1C7D08D80065C422 /* downloaderTests.swift */,
+				AF8108FD1C7D08D80065C422 /* Info.plist */,
 			);
 			path = downloaderTests;
+			sourceTree = "<group>";
+		};
+		F494EB7C33F25885A6284953 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9B296DFCF6DEE689B76E4AEC /* Pods_downloader.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AF8108A71C7D06C80065C422 /* downloader */ = {
+		AF8108E01C7D08D80065C422 /* downloader */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AF8108CD1C7D06C80065C422 /* Build configuration list for PBXNativeTarget "downloader" */;
+			buildConfigurationList = AF8109001C7D08D80065C422 /* Build configuration list for PBXNativeTarget "downloader" */;
 			buildPhases = (
-				AF8108A41C7D06C80065C422 /* Sources */,
-				AF8108A51C7D06C80065C422 /* Frameworks */,
-				AF8108A61C7D06C80065C422 /* Resources */,
+				647058D5FC7AA28D38373230 /* Check Pods Manifest.lock */,
+				AF8108DD1C7D08D80065C422 /* Sources */,
+				AF8108DE1C7D08D80065C422 /* Frameworks */,
+				AF8108DF1C7D08D80065C422 /* Resources */,
+				363BFDA4C9D820620CBD9DD8 /* Embed Pods Frameworks */,
+				1F1ECC6C3F86838A53D3F06D /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -133,46 +143,47 @@
 			);
 			name = downloader;
 			productName = downloader;
-			productReference = AF8108A81C7D06C80065C422 /* downloader.app */;
+			productReference = AF8108E11C7D08D80065C422 /* downloader.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AF8108C31C7D06C80065C422 /* downloaderTests */ = {
+		AF8108F61C7D08D80065C422 /* downloaderTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AF8108D01C7D06C80065C422 /* Build configuration list for PBXNativeTarget "downloaderTests" */;
+			buildConfigurationList = AF8109031C7D08D80065C422 /* Build configuration list for PBXNativeTarget "downloaderTests" */;
 			buildPhases = (
-				AF8108C01C7D06C80065C422 /* Sources */,
-				AF8108C11C7D06C80065C422 /* Frameworks */,
-				AF8108C21C7D06C80065C422 /* Resources */,
+				AF8108F31C7D08D80065C422 /* Sources */,
+				AF8108F41C7D08D80065C422 /* Frameworks */,
+				AF8108F51C7D08D80065C422 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				AF8108C61C7D06C80065C422 /* PBXTargetDependency */,
+				AF8108F91C7D08D80065C422 /* PBXTargetDependency */,
 			);
 			name = downloaderTests;
 			productName = downloaderTests;
-			productReference = AF8108C41C7D06C80065C422 /* downloaderTests.xctest */;
+			productReference = AF8108F71C7D08D80065C422 /* downloaderTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		AF8108A01C7D06C80065C422 /* Project object */ = {
+		AF8108D91C7D08D80065C422 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = peres;
 				TargetAttributes = {
-					AF8108A71C7D06C80065C422 = {
+					AF8108E01C7D08D80065C422 = {
 						CreatedOnToolsVersion = 7.2.1;
 					};
-					AF8108C31C7D06C80065C422 = {
+					AF8108F61C7D08D80065C422 = {
 						CreatedOnToolsVersion = 7.2.1;
-						TestTargetID = AF8108A71C7D06C80065C422;
+						TestTargetID = AF8108E01C7D08D80065C422;
 					};
 				};
 			};
-			buildConfigurationList = AF8108A31C7D06C80065C422 /* Build configuration list for PBXProject "downloader" */;
+			buildConfigurationList = AF8108DC1C7D08D80065C422 /* Build configuration list for PBXProject "downloader" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -180,29 +191,29 @@
 				en,
 				Base,
 			);
-			mainGroup = AF81089F1C7D06C80065C422;
-			productRefGroup = AF8108A91C7D06C80065C422 /* Products */;
+			mainGroup = AF8108D81C7D08D80065C422;
+			productRefGroup = AF8108E21C7D08D80065C422 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AF8108A71C7D06C80065C422 /* downloader */,
-				AF8108C31C7D06C80065C422 /* downloaderTests */,
+				AF8108E01C7D08D80065C422 /* downloader */,
+				AF8108F61C7D08D80065C422 /* downloaderTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		AF8108A61C7D06C80065C422 /* Resources */ = {
+		AF8108DF1C7D08D80065C422 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF8108BE1C7D06C80065C422 /* LaunchScreen.storyboard in Resources */,
-				AF8108BB1C7D06C80065C422 /* Assets.xcassets in Resources */,
-				AF8108B91C7D06C80065C422 /* Main.storyboard in Resources */,
+				AF8108F11C7D08D80065C422 /* LaunchScreen.storyboard in Resources */,
+				AF8108EE1C7D08D80065C422 /* Assets.xcassets in Resources */,
+				AF8108EC1C7D08D80065C422 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AF8108C21C7D06C80065C422 /* Resources */ = {
+		AF8108F51C7D08D80065C422 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -211,49 +222,96 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1F1ECC6C3F86838A53D3F06D /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-downloader/Pods-downloader-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		363BFDA4C9D820620CBD9DD8 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-downloader/Pods-downloader-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		647058D5FC7AA28D38373230 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		AF8108A41C7D06C80065C422 /* Sources */ = {
+		AF8108DD1C7D08D80065C422 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF8108B01C7D06C80065C422 /* AppDelegate.m in Sources */,
-				AF8108B31C7D06C80065C422 /* MasterViewController.m in Sources */,
-				AF8108AD1C7D06C80065C422 /* main.m in Sources */,
-				AF8108B61C7D06C80065C422 /* DetailViewController.m in Sources */,
+				AF8108E91C7D08D80065C422 /* DetailViewController.swift in Sources */,
+				AF8108E71C7D08D80065C422 /* MasterViewController.swift in Sources */,
+				AF8108E51C7D08D80065C422 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AF8108C01C7D06C80065C422 /* Sources */ = {
+		AF8108F31C7D08D80065C422 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF8108C91C7D06C80065C422 /* downloaderTests.m in Sources */,
+				AF8108FC1C7D08D80065C422 /* downloaderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		AF8108C61C7D06C80065C422 /* PBXTargetDependency */ = {
+		AF8108F91C7D08D80065C422 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = AF8108A71C7D06C80065C422 /* downloader */;
-			targetProxy = AF8108C51C7D06C80065C422 /* PBXContainerItemProxy */;
+			target = AF8108E01C7D08D80065C422 /* downloader */;
+			targetProxy = AF8108F81C7D08D80065C422 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		AF8108B71C7D06C80065C422 /* Main.storyboard */ = {
+		AF8108EA1C7D08D80065C422 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AF8108B81C7D06C80065C422 /* Base */,
+				AF8108EB1C7D08D80065C422 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		AF8108BC1C7D06C80065C422 /* LaunchScreen.storyboard */ = {
+		AF8108EF1C7D08D80065C422 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AF8108BD1C7D06C80065C422 /* Base */,
+				AF8108F01C7D08D80065C422 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -261,7 +319,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		AF8108CB1C7D06C80065C422 /* Debug */ = {
+		AF8108FE1C7D08D80065C422 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -301,11 +359,12 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		AF8108CC1C7D06C80065C422 /* Release */ = {
+		AF8108FF1C7D08D80065C422 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -343,8 +402,9 @@
 			};
 			name = Release;
 		};
-		AF8108CE1C7D06C80065C422 /* Debug */ = {
+		AF8109011C7D08D80065C422 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 86605BB61FE521D1D20AB91D /* Pods-downloader.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = downloader/Info.plist;
@@ -354,8 +414,9 @@
 			};
 			name = Debug;
 		};
-		AF8108CF1C7D06C80065C422 /* Release */ = {
+		AF8109021C7D08D80065C422 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FF95A943D6BB63B8AD389FD1 /* Pods-downloader.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = downloader/Info.plist;
@@ -365,7 +426,7 @@
 			};
 			name = Release;
 		};
-		AF8108D11C7D06C80065C422 /* Debug */ = {
+		AF8109041C7D08D80065C422 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -377,7 +438,7 @@
 			};
 			name = Debug;
 		};
-		AF8108D21C7D06C80065C422 /* Release */ = {
+		AF8109051C7D08D80065C422 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -392,32 +453,34 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AF8108A31C7D06C80065C422 /* Build configuration list for PBXProject "downloader" */ = {
+		AF8108DC1C7D08D80065C422 /* Build configuration list for PBXProject "downloader" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AF8108CB1C7D06C80065C422 /* Debug */,
-				AF8108CC1C7D06C80065C422 /* Release */,
+				AF8108FE1C7D08D80065C422 /* Debug */,
+				AF8108FF1C7D08D80065C422 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AF8108CD1C7D06C80065C422 /* Build configuration list for PBXNativeTarget "downloader" */ = {
+		AF8109001C7D08D80065C422 /* Build configuration list for PBXNativeTarget "downloader" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AF8108CE1C7D06C80065C422 /* Debug */,
-				AF8108CF1C7D06C80065C422 /* Release */,
+				AF8109011C7D08D80065C422 /* Debug */,
+				AF8109021C7D08D80065C422 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-		AF8108D01C7D06C80065C422 /* Build configuration list for PBXNativeTarget "downloaderTests" */ = {
+		AF8109031C7D08D80065C422 /* Build configuration list for PBXNativeTarget "downloaderTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AF8108D11C7D06C80065C422 /* Debug */,
-				AF8108D21C7D06C80065C422 /* Release */,
+				AF8109041C7D08D80065C422 /* Debug */,
+				AF8109051C7D08D80065C422 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = AF8108A01C7D06C80065C422 /* Project object */;
+	rootObject = AF8108D91C7D08D80065C422 /* Project object */;
 }
