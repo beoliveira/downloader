@@ -4,7 +4,7 @@ platform :ios, '9.0'
 use_frameworks!
 
 target 'downloader' do
-	pod 'AFNetworking'
+	pod 'Alamofire'
 end
 
 target 'downloaderTests' do
