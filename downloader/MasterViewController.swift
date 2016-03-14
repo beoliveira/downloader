@@ -12,7 +12,6 @@ import Alamofire
 class MasterViewController: UITableViewController, UIPopoverPresentationControllerDelegate {
 
     var detailViewController: DetailViewController? = nil
-    var objects = [AnyObject]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +21,10 @@ class MasterViewController: UITableViewController, UIPopoverPresentationControll
         if let split = self.splitViewController {
             let controllers = split.viewControllers
             self.detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
+        }
+        
+        NSNotificationCenter.defaultCenter().addObserverForName(Constants.downloadsDidChangeNotification, object: nil, queue: nil) { (notification) -> Void in
+            self.tableView.reloadData()
         }
     }
 
@@ -38,15 +41,6 @@ class MasterViewController: UITableViewController, UIPopoverPresentationControll
     // MARK: - Segues
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showDetail" {
-            if let indexPath = self.tableView.indexPathForSelectedRow {
-                let object = objects[indexPath.row] as! NSDate
-                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
-                controller.detailItem = object
-                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
-                controller.navigationItem.leftItemsSupplementBackButton = true
-            }
-        }
         if segue.identifier == "popoverSegue" {
             let vc = segue.destinationViewController
             vc.modalPresentationStyle = .Popover
@@ -61,14 +55,13 @@ class MasterViewController: UITableViewController, UIPopoverPresentationControll
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return objects.count
+        return DownloadManager.sharedInstance.downloads.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
-
-        let object = objects[indexPath.row] as! NSDate
-        cell.textLabel!.text = object.description
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! DownloadTableViewCell
+        let object = DownloadManager.sharedInstance.downloads[indexPath.row]
+        cell.setDownload(object)
         return cell
     }
 
@@ -79,7 +72,6 @@ class MasterViewController: UITableViewController, UIPopoverPresentationControll
 
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            objects.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
