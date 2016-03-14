@@ -26,6 +26,11 @@ class DownloadManager: NSObject {
         // TODO: load stored downloads from file
     }
     
+    //
+    // Returns an Alamofire DownloadDestination closure that informs the file save path
+    //
+    // Duplicated file names will get a numeric suffix
+    //
     func downloadDestination() -> (NSURL, NSHTTPURLResponse) -> (NSURL) {
         return {
             (temporaryURL, response) in
@@ -98,6 +103,7 @@ class DownloadManager: NSObject {
                 }
             }
             .response { _, response, data, error in
+                // TODO: Error handling
                 if let error = error {                    
                     print("Failed with error: \(error)")
                 } else {
