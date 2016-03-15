@@ -57,7 +57,9 @@ class DownloadManager: NSObject {
                 }
             }
             .response { _, response, data, error in
+                //
                 // TODO: Error handling
+                //
                 if let error = error {
                     print("Failed with error: \(error)")
                 } else {
@@ -79,6 +81,7 @@ class DownloadManager: NSObject {
                     downloadedObj!.fileURLString = url!.absoluteString
                     downloadedObj!.fileName = response?.suggestedFilename
                     downloadedObj!.mimeType = response?.MIMEType
+                    print("Updated downloaded object \(downloadObj.mimeType)")
                 }
         }
     }
@@ -103,23 +106,12 @@ class DownloadManager: NSObject {
         if !directoryURLs.isEmpty {
             //
             // Handles duplicated filenames by adding an integer suffix
-            //
-            let unencodedFileName = response.suggestedFilename
-            
-            var intendedPath = directoryURLs[0].URLByAppendingPathComponent(unencodedFileName!)
+            //            
+            var intendedPath = directoryURLs[0].URLByAppendingPathComponent(response.suggestedFilename!)
             var i = 1;
             
             while !NSFileManager.defaultManager().fileExistsAtPath(intendedPath.path!) {
-                let components = unencodedFileName?.componentsSeparatedByString(".")
-                let filename:String
-                
-                if components?.count == 1 {
-                    filename = String(format: "%@-%d", (components?.first)!, i)
-                } else {
-                    filename = String(format: "%@-%d.%@", (components?.first)!, i, (components?.last)!)
-                }
-                
-                intendedPath = directoryURLs[0].URLByAppendingPathComponent(filename)
+                intendedPath = directoryURLs[0].URLByAppendingPathComponent(formattedFilename(response.suggestedFilename!, count: i))
                 i += 1
             }
             
@@ -129,6 +121,19 @@ class DownloadManager: NSObject {
         }
         
         return nil
+    }
+    
+    func formattedFilename(unencodedFileName:String, count:Int) -> String {
+        let components = unencodedFileName.componentsSeparatedByString(".")
+        let filename:String
+        
+        if components.count == 1 {
+            filename = String(format: "%@-%d", (components.first)!, count)
+        } else {
+            filename = String(format: "%@-%d.%@", (components.first)!, count, (components.last)!)
+        }
+        
+        return filename
     }
     
     //
@@ -161,22 +166,11 @@ class DownloadManager: NSObject {
                 //
                 // Handles duplicated filenames by adding an integer suffix
                 //
-                let unencodedFileName = response.suggestedFilename
-                
-                var intendedPath = directoryURLs[0].URLByAppendingPathComponent(unencodedFileName!)
+                var intendedPath = directoryURLs[0].URLByAppendingPathComponent(response.suggestedFilename!)
                 var i = 1;
                 
                 while NSFileManager.defaultManager().fileExistsAtPath(intendedPath.path!) {
-                    let components = unencodedFileName?.componentsSeparatedByString(".")
-                    let filename:String
-                    
-                    if components?.count == 1 {
-                        filename = String(format: "%@-%d", (components?.first)!, i)
-                    } else {
-                        filename = String(format: "%@-%d.%@", (components?.first)!, i, (components?.last)!)
-                    }
-                    
-                    intendedPath = directoryURLs[0].URLByAppendingPathComponent(filename)
+                    intendedPath = directoryURLs[0].URLByAppendingPathComponent(self.formattedFilename(response.suggestedFilename!, count: i))
                     i += 1
                 }
                 

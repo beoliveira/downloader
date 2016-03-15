@@ -10,6 +10,8 @@ import UIKit
 import Alamofire
 import RealmSwift
 import QuickLook
+import AVKit
+import AVFoundation
 
 class DownloadsViewController: UITableViewController, UIPopoverPresentationControllerDelegate, QLPreviewControllerDataSource {
 
@@ -79,8 +81,24 @@ class DownloadsViewController: UITableViewController, UIPopoverPresentationContr
         return true
     }
     
+    var player: AVPlayer!
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if QLPreviewController.canPreviewItem((downloads!.first?.fileURL)!) {
+        let downloadObj = downloads![indexPath.row]
+        let url = downloadObj.fileURL
+        
+        if downloadObj.mimeType == "audio/mpeg" {
+            let asset = AVAsset(URL: url)
+            let item = AVPlayerItem(asset: asset)
+            player = AVPlayer(playerItem: item)
+            let playerViewController = AVPlayerViewController()
+            playerViewController.player = player
+            self.presentViewController(playerViewController, animated: true) {
+                self.player.play()
+//                playerViewController.player!.play()
+            }
+        }
+        else if QLPreviewController.canPreviewItem(url) {
             let previewQL = QLPreviewController()
             previewQL.dataSource = self
             showViewController(previewQL, sender: self)
@@ -102,6 +120,7 @@ class DownloadsViewController: UITableViewController, UIPopoverPresentationContr
             try! realm.write {
                 realm.delete(downloadObj)
             }
+            self.downloads = realm.objects(Download)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
