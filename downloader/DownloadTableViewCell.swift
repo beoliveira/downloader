@@ -33,9 +33,8 @@ class DownloadTableViewCell: UITableViewCell {
     }
     
     func progressDidChange(object:Dictionary<NSObject,AnyObject>){
-        
         let receivedDownloadObj = object["download"] as! Download
-        if receivedDownloadObj.urlString == downloadObj?.urlString {
+        if receivedDownloadObj.startDate.compare((downloadObj?.startDate)!) == NSComparisonResult.OrderedSame {
             self.detailTextLabel?.text = String(format: "Progress: %lld%%", (object["progress"]?.longLongValue)!)
         }
     }

@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import RealmSwift
 
 struct Constants {
     static let downloadsDidChangeNotification = "downloadsDidChangeNotification"
@@ -17,13 +18,64 @@ struct Constants {
 class DownloadManager: NSObject {
     static let sharedInstance = DownloadManager()
     var manager: Manager
-    var downloads: Array<Download> = []
+    let realm = try! Realm()
     
     override private init() {
         let configuration = NSURLSessionConfiguration.backgroundSessionConfigurationWithIdentifier("peres.downloader.background")
         manager = Alamofire.Manager(configuration: configuration)
+    }
+    
+    func addDownload(urlString: String) {
+        let destination = downloadDestination()
         
-        // TODO: load stored downloads from file
+        //
+        // Create the download object and sends a notification, adds the download to the global downloads object
+        //
+        let downloadObj = Download()
+        downloadObj.urlString = urlString
+        downloadObj.startDate = NSDate()
+        try! realm.write {
+            realm.add(downloadObj)
+        }
+        
+        manager.download(.GET, urlString, destination: destination)
+            .progress { bytesRead, totalBytesRead, totalBytesExpectedToRead in
+                print(totalBytesRead)
+                
+                //
+                // This closure is NOT called on the main queue for performance
+                // reasons. To update your ui, dispatch to the main queue.
+                //
+                dispatch_async(dispatch_get_main_queue()) {
+                    let progress = (totalBytesRead/totalBytesExpectedToRead)*100
+                    print("Total bytes read on main queue: \(totalBytesRead)")
+                    NSNotificationCenter.defaultCenter().postNotificationName(urlString, object: self, userInfo: ["progress":NSNumber(longLong: progress), "download":downloadObj])
+                }
+            }
+            .response { _, response, data, error in
+                // TODO: Error handling
+                if let error = error {
+                    print("Failed with error: \(error)")
+                } else {
+                    print("Downloaded file successfully")
+                }
+                if let
+                    data = data,
+                    resumeDataString = NSString(data: data, encoding: NSUTF8StringEncoding)
+                {
+                    print("Resume Data: \(resumeDataString)")
+                } else {
+                    print("Resume Data was empty")
+                }
+                let predicate = NSPredicate(format: "urlString = %@", urlString)
+                
+                let downloadedObj = self.realm.objects(Download).filter(predicate).first
+                try! self.realm.write {
+                    downloadedObj!.fileURLString = destination(NSURL(string: "")!, response!).absoluteString
+                    downloadedObj!.fileName = response?.suggestedFilename
+                    downloadedObj!.mimeType = response?.MIMEType
+                }
+        }
     }
     
     //
@@ -47,7 +99,7 @@ class DownloadManager: NSObject {
             
             if !directoryURLs.isEmpty {
                 //
-                // Handles duplicated filenames
+                // Handles duplicated filenames by adding an integer suffix
                 //
                 let unencodedFileName = response.suggestedFilename
                 
@@ -61,7 +113,7 @@ class DownloadManager: NSObject {
                     if components?.count == 1 {
                         filename = String(format: "%@-%d", (components?.first)!, i)
                     } else {
-                        filename = String(format: "%@-%d.%@", String(format: "%@-%d.%@", (components?.first)!, i, (components?.last)!))
+                        filename = String(format: "%@-%d.%@", (components?.first)!, i, (components?.last)!)
                     }
                     
                     intendedPath = directoryURLs[0].URLByAppendingPathComponent(filename)
@@ -76,50 +128,5 @@ class DownloadManager: NSObject {
             return temporaryURL
         }
     }
-    
-    func addDownload(urlString: String) {
-        let destination = downloadDestination()
-        
-        //
-        // Create the download object and sends a notification, adds the download to the global downloads object
-        //
-        let downloadObj = Download.init()
-        downloadObj.urlString = urlString
-        downloads.append(downloadObj)
-        NSNotificationCenter.defaultCenter().postNotificationName(Constants.downloadsDidChangeNotification, object: self)
-        
-        manager.download(.GET, urlString, destination: destination)
-            .progress { bytesRead, totalBytesRead, totalBytesExpectedToRead in
-                print(totalBytesRead)
-                
-                //
-                // This closure is NOT called on the main queue for performance
-                // reasons. To update your ui, dispatch to the main queue.
-                //
-                dispatch_async(dispatch_get_main_queue()) {
-                    let progress = (totalBytesRead/totalBytesExpectedToRead)*100
-                    print("Total bytes read on main queue: \(totalBytesRead)")
-                    NSNotificationCenter.defaultCenter().postNotificationName(urlString, object: self, userInfo: ["progress":NSNumber(longLong: progress), "download":downloadObj])
-                }
-            }
-            .response { _, response, data, error in
-                // TODO: Error handling
-                if let error = error {                    
-                    print("Failed with error: \(error)")
-                } else {
-                    print("Downloaded file successfully")
-                }
-                if let
-                    data = data,
-                    resumeDataString = NSString(data: data, encoding: NSUTF8StringEncoding)
-                {
-                    print("Resume Data: \(resumeDataString)")
-                } else {
-                    print("Resume Data was empty")
-                }
-                downloadObj.fileURLString = destination(NSURL(string: "")!, response!).absoluteString
-                downloadObj.fileName = response?.suggestedFilename
-                downloadObj.mimeType = response?.MIMEType
-        }
-    }
+
 }

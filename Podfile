@@ -5,6 +5,7 @@ use_frameworks!
 
 target 'downloader' do
 	pod 'Alamofire'
+    pod 'RealmSwift'
 end
 
 target 'downloaderTests' do

@@ -19,8 +19,6 @@
 		AF8108EE1C7D08D80065C422 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF8108ED1C7D08D80065C422 /* Assets.xcassets */; };
 		AF8108F11C7D08D80065C422 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF8108EF1C7D08D80065C422 /* LaunchScreen.storyboard */; };
 		AF8108FC1C7D08D80065C422 /* downloaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8108FB1C7D08D80065C422 /* downloaderTests.swift */; };
-		AFE6FACC1C9770BB0072BF58 /* downloader.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AFE6FACA1C9770BB0072BF58 /* downloader.xcdatamodeld */; };
-		AFE6FAD11C9771D10072BF58 /* Download+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE6FACF1C9771D10072BF58 /* Download+CoreDataProperties.swift */; };
 		AFE6FAD21C9771D10072BF58 /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE6FAD01C9771D10072BF58 /* Download.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,8 +50,6 @@
 		AF8108F71C7D08D80065C422 /* downloaderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = downloaderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF8108FB1C7D08D80065C422 /* downloaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = downloaderTests.swift; sourceTree = "<group>"; };
 		AF8108FD1C7D08D80065C422 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AFE6FACB1C9770BB0072BF58 /* downloader.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = downloader.xcdatamodel; sourceTree = "<group>"; };
-		AFE6FACF1C9771D10072BF58 /* Download+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Download+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AFE6FAD01C9771D10072BF58 /* Download.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Download.swift; sourceTree = "<group>"; };
 		FF95A943D6BB63B8AD389FD1 /* Pods-downloader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-downloader.release.xcconfig"; path = "Pods/Target Support Files/Pods-downloader/Pods-downloader.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -152,8 +148,6 @@
 		AFE6FAD41C9772C30072BF58 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				AFE6FACA1C9770BB0072BF58 /* downloader.xcdatamodeld */,
-				AFE6FACF1C9771D10072BF58 /* Download+CoreDataProperties.swift */,
 				AFE6FAD01C9771D10072BF58 /* Download.swift */,
 			);
 			name = Models;
@@ -347,12 +341,10 @@
 				AF8108E91C7D08D80065C422 /* DetailViewController.swift in Sources */,
 				AF63FB751C95DF4D0022F0F4 /* DownloadTableViewCell.swift in Sources */,
 				502C6F461C93390600D4DA11 /* DownloadManager.swift in Sources */,
-				AFE6FAD11C9771D10072BF58 /* Download+CoreDataProperties.swift in Sources */,
 				AF63FB6F1C95D7830022F0F4 /* AddViewController.swift in Sources */,
 				AF8108E71C7D08D80065C422 /* MasterViewController.swift in Sources */,
 				502C6F441C93363000D4DA11 /* DismissSegue.swift in Sources */,
 				AF8108E51C7D08D80065C422 /* AppDelegate.swift in Sources */,
-				AFE6FACC1C9770BB0072BF58 /* downloader.xcdatamodeld in Sources */,
 				AFE6FAD21C9771D10072BF58 /* Download.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -557,19 +549,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		AFE6FACA1C9770BB0072BF58 /* downloader.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				AFE6FACB1C9770BB0072BF58 /* downloader.xcdatamodel */,
-			);
-			currentVersion = AFE6FACB1C9770BB0072BF58 /* downloader.xcdatamodel */;
-			path = downloader.xcdatamodeld;
-			sourceTree = SOURCE_ROOT;
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = AF8108D91C7D08D80065C422 /* Project object */;
 }

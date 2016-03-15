@@ -7,11 +7,18 @@
 //
 
 import Foundation
-import CoreData
+import RealmSwift
 
-
-class Download: NSManagedObject {
-
-// Insert code here to add functionality to your managed object subclass
-
+class Download: Object {
+    dynamic var startDate = NSDate()
+    dynamic var urlString = ""
+    dynamic var fileName: String? = nil
+    dynamic var fileURLString: String? = nil
+    dynamic var mimeType: String? = nil
+    
+    var fileURL:NSURL {
+        get {
+            return NSURL(string: self.fileURLString!)!
+        }
+    }
 }

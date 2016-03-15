@@ -85,7 +85,11 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-downloader/Alamofire.framework"
+  install_framework "Pods-downloader/Realm.framework"
+  install_framework "Pods-downloader/RealmSwift.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-downloader/Alamofire.framework"
+  install_framework "Pods-downloader/Realm.framework"
+  install_framework "Pods-downloader/RealmSwift.framework"
 fi

@@ -8,10 +8,15 @@
 
 import UIKit
 import Alamofire
+import RealmSwift
+import QuickLook
 
-class MasterViewController: UITableViewController, UIPopoverPresentationControllerDelegate {
+class MasterViewController: UITableViewController, UIPopoverPresentationControllerDelegate, QLPreviewControllerDataSource {
 
     var detailViewController: DetailViewController? = nil
+    let realm = try! Realm()
+    var token:NotificationToken?
+    var downloads:Results<Download>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +28,8 @@ class MasterViewController: UITableViewController, UIPopoverPresentationControll
             self.detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
         
-        NSNotificationCenter.defaultCenter().addObserverForName(Constants.downloadsDidChangeNotification, object: nil, queue: nil) { (notification) -> Void in
+        token = realm.objects(Download).addNotificationBlock { (results, error) -> () in
+            self.downloads = results
             self.tableView.reloadData()
         }
     }
@@ -31,6 +37,10 @@ class MasterViewController: UITableViewController, UIPopoverPresentationControll
     override func viewWillAppear(animated: Bool) {
         self.clearsSelectionOnViewWillAppear = self.splitViewController!.collapsed
         super.viewWillAppear(animated)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        token!.stop()
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,19 +65,29 @@ class MasterViewController: UITableViewController, UIPopoverPresentationControll
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return DownloadManager.sharedInstance.downloads.count
+        if downloads == nil {
+            return 0
+        }
+        return downloads!.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! DownloadTableViewCell
-        let object = DownloadManager.sharedInstance.downloads[indexPath.row]
-        cell.setDownload(object)
+        cell.setDownload(downloads![indexPath.row])
         return cell
     }
 
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if QLPreviewController.canPreviewItem((downloads!.first?.fileURL)!) {
+            let previewQL = QLPreviewController()
+            previewQL.dataSource = self
+            showViewController(previewQL, sender: self)
+        }
     }
 
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -83,6 +103,15 @@ class MasterViewController: UITableViewController, UIPopoverPresentationControll
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
         return .None
     }
-
+    
+    // MARK: - QLPreviewControllerDataSource
+    
+    func previewController(controller: QLPreviewController, previewItemAtIndex index: Int) -> QLPreviewItem {
+        return (downloads!.first?.fileURL)!
+    }
+    
+    func numberOfPreviewItemsInPreviewController(controller: QLPreviewController) -> Int {
+        return 1;
+    }
 }
 
