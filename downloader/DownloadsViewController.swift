@@ -11,9 +11,8 @@ import Alamofire
 import RealmSwift
 import QuickLook
 
-class MasterViewController: UITableViewController, UIPopoverPresentationControllerDelegate, QLPreviewControllerDataSource {
+class DownloadsViewController: UITableViewController, UIPopoverPresentationControllerDelegate, QLPreviewControllerDataSource {
 
-    var detailViewController: DetailViewController? = nil
     let realm = try! Realm()
     var token:NotificationToken?
     var downloads:Results<Download>?
@@ -22,11 +21,6 @@ class MasterViewController: UITableViewController, UIPopoverPresentationControll
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
-
-        if let split = self.splitViewController {
-            let controllers = split.viewControllers
-            self.detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
-        }
         
         token = realm.objects(Download).addNotificationBlock { (results, error) -> () in
             self.downloads = results
@@ -37,6 +31,9 @@ class MasterViewController: UITableViewController, UIPopoverPresentationControll
     override func viewWillAppear(animated: Bool) {
         self.clearsSelectionOnViewWillAppear = self.splitViewController!.collapsed
         super.viewWillAppear(animated)
+        
+        self.downloads = realm.objects(Download)
+        self.tableView.reloadData()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -92,6 +89,19 @@ class MasterViewController: UITableViewController, UIPopoverPresentationControll
 
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
+            let downloadObj = downloads![indexPath.row]
+            do {
+                if (downloadObj.fileURLString != nil) {
+                    try NSFileManager.defaultManager().removeItemAtPath(downloadObj.fileURL.path!)
+                }
+                
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }
+            
+            try! realm.write {
+                realm.delete(downloadObj)
+            }
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
@@ -107,11 +117,12 @@ class MasterViewController: UITableViewController, UIPopoverPresentationControll
     // MARK: - QLPreviewControllerDataSource
     
     func previewController(controller: QLPreviewController, previewItemAtIndex index: Int) -> QLPreviewItem {
-        return (downloads!.first?.fileURL)!
+        print("\(downloads![index].fileURL)")
+        return downloads![index].fileURL
     }
     
     func numberOfPreviewItemsInPreviewController(controller: QLPreviewController) -> Int {
-        return 1;
+        return downloads!.count;
     }
 }
 

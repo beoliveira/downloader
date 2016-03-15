@@ -18,7 +18,7 @@ class Download: Object {
     
     var fileURL:NSURL {
         get {
-            return NSURL(string: self.fileURLString!)!
+            return NSURL(string: self.fileURLString!)!.filePathURL!
         }
     }
 }

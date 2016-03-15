@@ -27,16 +27,18 @@ class DownloadTableViewCell: UITableViewCell {
         downloadObj = download
         
         NSNotificationCenter.defaultCenter().addObserverForName(download.urlString, object: nil, queue: nil) { (notification) -> Void in
-            let progressValue = notification.userInfo!["progress"] as! NSNumber
-            self.detailTextLabel?.text = String(format: "Progress: %lld%%", progressValue.longLongValue)
+            let userInfo = notification.userInfo
+            let progressValue = userInfo!["progress"] as! NSNumber
+            let receivedDonwloadObj:Download = userInfo!["downloadObj"] as! Download
+            
+            let totalBytes = userInfo!["totalBytes"]?.longLongValue
+            let totalBytesExpectedToRead = userInfo!["totalBytesExpectedToRead"]?.longLongValue
+            
+            let formatter = NSByteCountFormatter()
+            
+            if receivedDonwloadObj.startDate.compare((self.downloadObj?.startDate)!) == NSComparisonResult.OrderedSame {
+                self.detailTextLabel?.text = String(format: "Progress: %lld%% (%@ / %@)", progressValue.longLongValue, formatter.stringFromByteCount(totalBytes!), formatter.stringFromByteCount(totalBytesExpectedToRead!))
+            }
         }
     }
-    
-    func progressDidChange(object:Dictionary<NSObject,AnyObject>){
-        let receivedDownloadObj = object["download"] as! Download
-        if receivedDownloadObj.startDate.compare((downloadObj?.startDate)!) == NSComparisonResult.OrderedSame {
-            self.detailTextLabel?.text = String(format: "Progress: %lld%%", (object["progress"]?.longLongValue)!)
-        }
-    }
-
 }

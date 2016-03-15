@@ -13,8 +13,7 @@
 		AF63FB6F1C95D7830022F0F4 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF63FB6E1C95D7830022F0F4 /* AddViewController.swift */; };
 		AF63FB751C95DF4D0022F0F4 /* DownloadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF63FB741C95DF4D0022F0F4 /* DownloadTableViewCell.swift */; };
 		AF8108E51C7D08D80065C422 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8108E41C7D08D80065C422 /* AppDelegate.swift */; };
-		AF8108E71C7D08D80065C422 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8108E61C7D08D80065C422 /* MasterViewController.swift */; };
-		AF8108E91C7D08D80065C422 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8108E81C7D08D80065C422 /* DetailViewController.swift */; };
+		AF8108E71C7D08D80065C422 /* DownloadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8108E61C7D08D80065C422 /* DownloadsViewController.swift */; };
 		AF8108EC1C7D08D80065C422 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF8108EA1C7D08D80065C422 /* Main.storyboard */; };
 		AF8108EE1C7D08D80065C422 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF8108ED1C7D08D80065C422 /* Assets.xcassets */; };
 		AF8108F11C7D08D80065C422 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF8108EF1C7D08D80065C422 /* LaunchScreen.storyboard */; };
@@ -41,8 +40,7 @@
 		AF63FB741C95DF4D0022F0F4 /* DownloadTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTableViewCell.swift; sourceTree = "<group>"; };
 		AF8108E11C7D08D80065C422 /* downloader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = downloader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF8108E41C7D08D80065C422 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AF8108E61C7D08D80065C422 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
-		AF8108E81C7D08D80065C422 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		AF8108E61C7D08D80065C422 /* DownloadsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsViewController.swift; sourceTree = "<group>"; };
 		AF8108EB1C7D08D80065C422 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AF8108ED1C7D08D80065C422 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AF8108F01C7D08D80065C422 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -86,8 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				AF63FB6E1C95D7830022F0F4 /* AddViewController.swift */,
-				AF8108E61C7D08D80065C422 /* MasterViewController.swift */,
-				AF8108E81C7D08D80065C422 /* DetailViewController.swift */,
+				AF8108E61C7D08D80065C422 /* DownloadsViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -239,6 +236,7 @@
 				TargetAttributes = {
 					AF8108E01C7D08D80065C422 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = WZCH8LX875;
 					};
 					AF8108F61C7D08D80065C422 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -338,11 +336,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF8108E91C7D08D80065C422 /* DetailViewController.swift in Sources */,
 				AF63FB751C95DF4D0022F0F4 /* DownloadTableViewCell.swift in Sources */,
 				502C6F461C93390600D4DA11 /* DownloadManager.swift in Sources */,
 				AF63FB6F1C95D7830022F0F4 /* AddViewController.swift in Sources */,
-				AF8108E71C7D08D80065C422 /* MasterViewController.swift in Sources */,
+				AF8108E71C7D08D80065C422 /* DownloadsViewController.swift in Sources */,
 				502C6F441C93363000D4DA11 /* DismissSegue.swift in Sources */,
 				AF8108E51C7D08D80065C422 /* AppDelegate.swift in Sources */,
 				AFE6FAD21C9771D10072BF58 /* Download.swift in Sources */,
@@ -475,10 +472,13 @@
 			baseConfigurationReference = 86605BB61FE521D1D20AB91D /* Pods-downloader.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = downloader/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = peres.downloader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -487,10 +487,13 @@
 			baseConfigurationReference = FF95A943D6BB63B8AD389FD1 /* Pods-downloader.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = downloader/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = peres.downloader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

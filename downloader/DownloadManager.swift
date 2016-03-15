@@ -47,9 +47,13 @@ class DownloadManager: NSObject {
                 // reasons. To update your ui, dispatch to the main queue.
                 //
                 dispatch_async(dispatch_get_main_queue()) {
-                    let progress = (totalBytesRead/totalBytesExpectedToRead)*100
-                    print("Total bytes read on main queue: \(totalBytesRead)")
-                    NSNotificationCenter.defaultCenter().postNotificationName(urlString, object: self, userInfo: ["progress":NSNumber(longLong: progress), "download":downloadObj])
+                    let progress = (Float(totalBytesRead)/Float(totalBytesExpectedToRead)) * 100
+                    
+                    NSNotificationCenter.defaultCenter().postNotificationName(urlString, object: self, userInfo: [
+                        "progress":NSNumber(float: progress),
+                        "totalBytes":NSNumber(longLong: totalBytesRead),
+                        "totalBytesExpectedToRead":NSNumber(longLong: totalBytesExpectedToRead),
+                        "downloadObj":downloadObj])
                 }
             }
             .response { _, response, data, error in
@@ -71,10 +75,74 @@ class DownloadManager: NSObject {
                 
                 let downloadedObj = self.realm.objects(Download).filter(predicate).first
                 try! self.realm.write {
-                    downloadedObj!.fileURLString = destination(NSURL(string: "")!, response!).absoluteString
+                    let url = self.downloadedDestination(response!)
+                    downloadedObj!.fileURLString = url!.absoluteString
                     downloadedObj!.fileName = response?.suggestedFilename
                     downloadedObj!.mimeType = response?.MIMEType
                 }
+        }
+    }
+    
+    //
+    // Returns an NSURL containing the downloaded file destination
+    //
+    func downloadedDestination(response: NSHTTPURLResponse) -> NSURL? {
+        let directoryURLs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+        
+        //
+        // Print directory contents
+        //
+        //            do {
+        //                let directoryContents = try NSFileManager.defaultManager().contentsOfDirectoryAtURL(directoryURLs.first!, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions())
+        //                print(directoryContents)
+        //
+        //            } catch let error as NSError {
+        //                print(error.localizedDescription)
+        //            }
+        
+        if !directoryURLs.isEmpty {
+            //
+            // Handles duplicated filenames by adding an integer suffix
+            //
+            let unencodedFileName = response.suggestedFilename
+            
+            var intendedPath = directoryURLs[0].URLByAppendingPathComponent(unencodedFileName!)
+            var i = 1;
+            
+            while !NSFileManager.defaultManager().fileExistsAtPath(intendedPath.path!) {
+                let components = unencodedFileName?.componentsSeparatedByString(".")
+                let filename:String
+                
+                if components?.count == 1 {
+                    filename = String(format: "%@-%d", (components?.first)!, i)
+                } else {
+                    filename = String(format: "%@-%d.%@", (components?.first)!, i, (components?.last)!)
+                }
+                
+                intendedPath = directoryURLs[0].URLByAppendingPathComponent(filename)
+                i += 1
+            }
+            
+            print("Saved path: \(intendedPath)")
+            
+            return intendedPath
+        }
+        
+        return nil
+    }
+    
+    //
+    // Print directory contents, for debugging
+    //
+    func _printDirectoryContents() {
+        let directoryURLs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+
+        do {
+            let directoryContents = try NSFileManager.defaultManager().contentsOfDirectoryAtURL(directoryURLs.first!, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions())
+            print(directoryContents)
+            
+        } catch let error as NSError {
+            print(error.localizedDescription)
         }
     }
     
@@ -88,14 +156,6 @@ class DownloadManager: NSObject {
             (temporaryURL, response) in
             
             let directoryURLs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-            
-            do {
-                let directoryContents = try NSFileManager.defaultManager().contentsOfDirectoryAtURL(directoryURLs.first!, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions())
-                print(directoryContents)
-                
-            } catch let error as NSError {
-                print(error.localizedDescription)
-            }
             
             if !directoryURLs.isEmpty {
                 //
