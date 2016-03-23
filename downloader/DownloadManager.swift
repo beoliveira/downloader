@@ -25,6 +25,12 @@ class DownloadManager: NSObject {
         manager = Alamofire.Manager(configuration: configuration)
     }
     
+    func URLforFileName(string:String) -> NSURL {
+        let directoryURLs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+        
+        return directoryURLs[0].URLByAppendingPathComponent(string)
+    }
+    
     func addDownload(urlString: String) {
         let destination = downloadDestination()
         
@@ -77,8 +83,6 @@ class DownloadManager: NSObject {
                 
                 let downloadedObj = self.realm.objects(Download).filter(predicate).first
                 try! self.realm.write {
-                    let url = self.downloadedDestination(response!)
-                    downloadedObj!.fileURLString = url!.absoluteString
                     downloadedObj!.fileName = response?.suggestedFilename
                     downloadedObj!.mimeType = response?.MIMEType
                     print("Updated downloaded object \(downloadObj.mimeType)")
@@ -107,11 +111,11 @@ class DownloadManager: NSObject {
             //
             // Handles duplicated filenames by adding an integer suffix
             //            
-            var intendedPath = directoryURLs[0].URLByAppendingPathComponent(response.suggestedFilename!)
+            var intendedPath = URLforFileName(response.suggestedFilename!)
             var i = 1;
             
             while !NSFileManager.defaultManager().fileExistsAtPath(intendedPath.path!) {
-                intendedPath = directoryURLs[0].URLByAppendingPathComponent(formattedFilename(response.suggestedFilename!, count: i))
+                intendedPath = URLforFileName(formattedFilename(response.suggestedFilename!, count: i))
                 i += 1
             }
             
@@ -166,11 +170,11 @@ class DownloadManager: NSObject {
                 //
                 // Handles duplicated filenames by adding an integer suffix
                 //
-                var intendedPath = directoryURLs[0].URLByAppendingPathComponent(response.suggestedFilename!)
+                var intendedPath = self.URLforFileName(response.suggestedFilename!)
                 var i = 1;
                 
                 while NSFileManager.defaultManager().fileExistsAtPath(intendedPath.path!) {
-                    intendedPath = directoryURLs[0].URLByAppendingPathComponent(self.formattedFilename(response.suggestedFilename!, count: i))
+                    intendedPath = self.URLforFileName(self.formattedFilename(response.suggestedFilename!, count: i))
                     i += 1
                 }
                 

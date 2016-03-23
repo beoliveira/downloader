@@ -18,7 +18,36 @@ class DownloadsViewController: UITableViewController, UIPopoverPresentationContr
     let realm = try! Realm()
     var token:NotificationToken?
     var downloads:Results<Download>?
-
+    var player: AVPlayer!
+    
+    func isMP3MIMEType(string: String) -> Bool {
+        let string = string.lowercaseString
+        return string == "audio/mpeg" || string == "audio/x-mpeg-3" || string == "video/mpeg" || string == "video/x-mpeg"
+    }
+    
+    func handleOpenFileForDownloadAtIndexPath(indexPath:NSIndexPath) {
+        let downloadObj = downloads![indexPath.row]
+        let url = downloadObj.fileURL
+        
+        if isMP3MIMEType(downloadObj.mimeType!) {
+            let asset = AVAsset(URL: url)
+            let item = AVPlayerItem(asset: asset)
+            player = AVPlayer(playerItem: item)
+            let playerViewController = AVPlayerViewController()
+            playerViewController.player = player
+            presentViewController(playerViewController, animated: true) {
+                self.player.play()
+            }
+        }
+        else if QLPreviewController.canPreviewItem(url) {
+            let previewQL = QLPreviewController()
+            previewQL.dataSource = self
+            showViewController(previewQL, sender: self)
+        }
+    }
+    
+    // MARK: - View Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -34,8 +63,8 @@ class DownloadsViewController: UITableViewController, UIPopoverPresentationContr
         self.clearsSelectionOnViewWillAppear = self.splitViewController!.collapsed
         super.viewWillAppear(animated)
         
-        self.downloads = realm.objects(Download)
-        self.tableView.reloadData()
+        downloads = realm.objects(Download)
+        tableView.reloadData()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -81,35 +110,15 @@ class DownloadsViewController: UITableViewController, UIPopoverPresentationContr
         return true
     }
     
-    var player: AVPlayer!
-    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let downloadObj = downloads![indexPath.row]
-        let url = downloadObj.fileURL
-        
-        if downloadObj.mimeType == "audio/mpeg" {
-            let asset = AVAsset(URL: url)
-            let item = AVPlayerItem(asset: asset)
-            player = AVPlayer(playerItem: item)
-            let playerViewController = AVPlayerViewController()
-            playerViewController.player = player
-            self.presentViewController(playerViewController, animated: true) {
-                self.player.play()
-//                playerViewController.player!.play()
-            }
-        }
-        else if QLPreviewController.canPreviewItem(url) {
-            let previewQL = QLPreviewController()
-            previewQL.dataSource = self
-            showViewController(previewQL, sender: self)
-        }
+        handleOpenFileForDownloadAtIndexPath(indexPath)
     }
 
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             let downloadObj = downloads![indexPath.row]
             do {
-                if (downloadObj.fileURLString != nil) {
+                if (downloadObj.fileName != nil) {
                     try NSFileManager.defaultManager().removeItemAtPath(downloadObj.fileURL.path!)
                 }
                 
@@ -120,7 +129,7 @@ class DownloadsViewController: UITableViewController, UIPopoverPresentationContr
             try! realm.write {
                 realm.delete(downloadObj)
             }
-            self.downloads = realm.objects(Download)
+            downloads = realm.objects(Download)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.

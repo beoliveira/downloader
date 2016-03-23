@@ -13,12 +13,19 @@ class Download: Object {
     dynamic var startDate = NSDate()
     dynamic var urlString = ""
     dynamic var fileName: String? = nil
-    dynamic var fileURLString: String? = nil
     dynamic var mimeType: String? = nil
+    
+    var fileURLString:String {
+        get {
+            return self.fileURL.absoluteString
+        }
+    }
     
     var fileURL:NSURL {
         get {
-            return NSURL(string: self.fileURLString!)!.filePathURL!
+            let directoryURLs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+            
+            return directoryURLs[0].URLByAppendingPathComponent(self.fileName!)
         }
     }
 }
