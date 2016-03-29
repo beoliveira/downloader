@@ -13,7 +13,7 @@ import QuickLook
 import AVKit
 import AVFoundation
 
-class DownloadsViewController: UITableViewController, UIPopoverPresentationControllerDelegate, QLPreviewControllerDataSource {
+class DownloadsViewController: UITableViewController, UIPopoverPresentationControllerDelegate, QLPreviewControllerDataSource, AddViewControllerDelegate {
 
     let realm = try! Realm()
     var token:NotificationToken?
@@ -27,22 +27,30 @@ class DownloadsViewController: UITableViewController, UIPopoverPresentationContr
     
     func handleOpenFileForDownloadAtIndexPath(indexPath:NSIndexPath) {
         let downloadObj = downloads![indexPath.row]
-        let url = downloadObj.fileURL
         
-        if isMP3MIMEType(downloadObj.mimeType!) {
-            let asset = AVAsset(URL: url)
-            let item = AVPlayerItem(asset: asset)
-            player = AVPlayer(playerItem: item)
-            let playerViewController = AVPlayerViewController()
-            playerViewController.player = player
-            presentViewController(playerViewController, animated: true) {
-                self.player.play()
+        if let url = downloadObj.fileURL {
+            if isMP3MIMEType(downloadObj.mimeType!) {
+                let asset = AVAsset(URL: url)
+                let item = AVPlayerItem(asset: asset)
+                player = AVPlayer(playerItem: item)
+                let playerViewController = AVPlayerViewController()
+                playerViewController.player = player
+                presentViewController(playerViewController, animated: true) {
+                    self.player.play()
+                }
             }
-        }
-        else if QLPreviewController.canPreviewItem(url) {
-            let previewQL = QLPreviewController()
-            previewQL.dataSource = self
-            showViewController(previewQL, sender: self)
+            else if QLPreviewController.canPreviewItem(url) {
+                let previewQL = QLPreviewController()
+                previewQL.dataSource = self
+                previewQL.currentPreviewItemIndex = indexPath.row
+                showViewController(previewQL, sender: self)
+            }
+        } else {
+            let alert = UIAlertController(title: "Download In Progress", message: "File is still downloading", preferredStyle: UIAlertControllerStyle.Alert)
+            let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
+            })
+            alert.addAction(ok)
+            presentViewController(alert, animated: true, completion: nil)
         }
     }
     
@@ -80,9 +88,10 @@ class DownloadsViewController: UITableViewController, UIPopoverPresentationContr
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "popoverSegue" {
-            let vc = segue.destinationViewController
+            let vc = segue.destinationViewController as! AddViewController
             vc.modalPresentationStyle = .Popover
             vc.popoverPresentationController?.delegate = self
+            vc.delegate = self
         }
     }
 
@@ -119,9 +128,9 @@ class DownloadsViewController: UITableViewController, UIPopoverPresentationContr
             let downloadObj = downloads![indexPath.row]
             do {
                 if (downloadObj.fileName != nil) {
-                    try NSFileManager.defaultManager().removeItemAtPath(downloadObj.fileURL.path!)
+                    try NSFileManager.defaultManager().removeItemAtPath(downloadObj.fileURL!.path!)
+                    print("File deleted successfully")
                 }
-                
             } catch let error as NSError {
                 print(error.localizedDescription)
             }
@@ -145,12 +154,16 @@ class DownloadsViewController: UITableViewController, UIPopoverPresentationContr
     // MARK: - QLPreviewControllerDataSource
     
     func previewController(controller: QLPreviewController, previewItemAtIndex index: Int) -> QLPreviewItem {
-        print("\(downloads![index].fileURL)")
-        return downloads![index].fileURL
+        return downloads![index].fileURL!
     }
     
     func numberOfPreviewItemsInPreviewController(controller: QLPreviewController) -> Int {
         return downloads!.count;
+    }
+    
+    func didAddDownload() {
+        downloads = realm.objects(Download)
+        tableView.reloadData()
     }
 }
 

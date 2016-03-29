@@ -25,19 +25,30 @@ class DownloadTableViewCell: UITableViewCell {
     func setDownload(download:Download){
         self.textLabel?.text = download.urlString
         downloadObj = download
+
+        if download.completed {
+            self.detailTextLabel?.text = "Downloaded"
+        }
         
-        NSNotificationCenter.defaultCenter().addObserverForName(download.urlString, object: nil, queue: nil) { (notification) -> Void in
+        NSNotificationCenter.defaultCenter().addObserverForName(download.startDateString, object: nil, queue: nil) { (notification) -> Void in
             let userInfo = notification.userInfo
             let progressValue = userInfo!["progress"] as! NSNumber
             let receivedDonwloadObj:Download = userInfo!["downloadObj"] as! Download
             
+            if let dobj = self.downloadObj {
+                if receivedDonwloadObj.invalidated || dobj.invalidated {
+                    return
+                }
+            }
+            
             let totalBytes = userInfo!["totalBytes"]?.longLongValue
             let totalBytesExpectedToRead = userInfo!["totalBytesExpectedToRead"]?.longLongValue
             
-            let formatter = NSByteCountFormatter()
-            
             if receivedDonwloadObj.startDate.compare((self.downloadObj?.startDate)!) == NSComparisonResult.OrderedSame {
-                self.detailTextLabel?.text = String(format: "Progress: %lld%% (%@ / %@)", progressValue.longLongValue, formatter.stringFromByteCount(totalBytes!), formatter.stringFromByteCount(totalBytesExpectedToRead!))
+                let formatter = NSByteCountFormatter()
+                let formattedFileSize = formatter.stringFromByteCount(totalBytesExpectedToRead!)
+                
+                self.detailTextLabel?.text = String(format: "Progress: %lld%% (%@ / %@)", progressValue.longLongValue, formatter.stringFromByteCount(totalBytes!), formattedFileSize)
             }
         }
     }

@@ -32,8 +32,6 @@ class DownloadManager: NSObject {
     }
     
     func addDownload(urlString: String) {
-        let destination = downloadDestination()
-        
         //
         // Create the download object and sends a notification, adds the download to the global downloads object
         //
@@ -44,7 +42,7 @@ class DownloadManager: NSObject {
             realm.add(downloadObj)
         }
         
-        manager.download(.GET, urlString, destination: destination)
+        manager.download(.GET, urlString, destination: downloadDestination())
             .progress { bytesRead, totalBytesRead, totalBytesExpectedToRead in
                 print(totalBytesRead)
                 
@@ -55,7 +53,7 @@ class DownloadManager: NSObject {
                 dispatch_async(dispatch_get_main_queue()) {
                     let progress = (Float(totalBytesRead)/Float(totalBytesExpectedToRead)) * 100
                     
-                    NSNotificationCenter.defaultCenter().postNotificationName(urlString, object: self, userInfo: [
+                    NSNotificationCenter.defaultCenter().postNotificationName(downloadObj.startDateString, object: self, userInfo: [
                         "progress":NSNumber(float: progress),
                         "totalBytes":NSNumber(longLong: totalBytesRead),
                         "totalBytesExpectedToRead":NSNumber(longLong: totalBytesExpectedToRead),
@@ -63,13 +61,20 @@ class DownloadManager: NSObject {
                 }
             }
             .response { _, response, data, error in
-                //
-                // TODO: Error handling
-                //
                 if let error = error {
                     print("Failed with error: \(error)")
+                    //
+                    // TODO: Error handling
+                    //
                 } else {
                     print("Downloaded file successfully")
+                    //
+                    // Update local storage with file information
+                    //
+                    try! self.realm.write {
+                        downloadObj.fileName = self.filenameForResponse(response!)
+                        downloadObj.mimeType = response!.MIMEType
+                    }
                 }
                 if let
                     data = data,
@@ -79,62 +84,21 @@ class DownloadManager: NSObject {
                 } else {
                     print("Resume Data was empty")
                 }
-                let predicate = NSPredicate(format: "urlString = %@", urlString)
-                
-                let downloadedObj = self.realm.objects(Download).filter(predicate).first
-                try! self.realm.write {
-                    downloadedObj!.fileName = response?.suggestedFilename
-                    downloadedObj!.mimeType = response?.MIMEType
-                    print("Updated downloaded object \(downloadObj.mimeType)")
-                }
         }
     }
     
     //
-    // Returns an NSURL containing the downloaded file destination
+    // Returns a string containing the downloaded file file name
     //
-    func downloadedDestination(response: NSHTTPURLResponse) -> NSURL? {
-        let directoryURLs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        
-        //
-        // Print directory contents
-        //
-        //            do {
-        //                let directoryContents = try NSFileManager.defaultManager().contentsOfDirectoryAtURL(directoryURLs.first!, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions())
-        //                print(directoryContents)
-        //
-        //            } catch let error as NSError {
-        //                print(error.localizedDescription)
-        //            }
-        
-        if !directoryURLs.isEmpty {
-            //
-            // Handles duplicated filenames by adding an integer suffix
-            //            
-            var intendedPath = URLforFileName(response.suggestedFilename!)
-            var i = 1;
-            
-            while !NSFileManager.defaultManager().fileExistsAtPath(intendedPath.path!) {
-                intendedPath = URLforFileName(formattedFilename(response.suggestedFilename!, count: i))
-                i += 1
-            }
-            
-            print("Saved path: \(intendedPath)")
-            
-            return intendedPath
-        }
-        
-        return nil
-    }
-    
-    func formattedFilename(unencodedFileName:String, count:Int) -> String {
-        let components = unencodedFileName.componentsSeparatedByString(".")
+    func filenameForResponse(response:NSHTTPURLResponse) -> String {
+        let components = response.suggestedFilename!.componentsSeparatedByString(".")
         let filename:String
+        let dateString = response.allHeaderFields["Date"] as! String
         
         if components.count == 1 {
-            filename = String(format: "%@-%d", (components.first)!, count)
+            filename = String(format: "%@%@", (components.first)!, dateString)
         } else {
-            filename = String(format: "%@-%d.%@", (components.first)!, count, (components.last)!)
+            filename = String(format: "%@%@.%@", (components.first)!, dateString, (components.last)!)
         }
         
         return filename
@@ -167,20 +131,11 @@ class DownloadManager: NSObject {
             let directoryURLs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
             
             if !directoryURLs.isEmpty {
-                //
-                // Handles duplicated filenames by adding an integer suffix
-                //
-                var intendedPath = self.URLforFileName(response.suggestedFilename!)
-                var i = 1;
+                let url = self.URLforFileName(self.filenameForResponse(response))
                 
-                while NSFileManager.defaultManager().fileExistsAtPath(intendedPath.path!) {
-                    intendedPath = self.URLforFileName(self.formattedFilename(response.suggestedFilename!, count: i))
-                    i += 1
-                }
+                print("Path: \(url)")
                 
-                print("Path: \(intendedPath)")
-                
-                return intendedPath
+                return url
             }
             
             return temporaryURL

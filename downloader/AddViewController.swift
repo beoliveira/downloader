@@ -8,9 +8,14 @@
 
 import UIKit
 
+protocol AddViewControllerDelegate:class {
+    func didAddDownload()
+}
+
 class AddViewController: UIViewController {
 
     @IBOutlet weak var textView: UITextView!
+    weak var delegate:AddViewControllerDelegate?
     
     @IBAction func clearButtonPressed(sender: AnyObject) {
         self.textView.text = ""
@@ -24,5 +29,6 @@ class AddViewController: UIViewController {
     @IBAction func addButtonPressed(sender: AnyObject) {
         DownloadManager.sharedInstance.addDownload(self.textView.text)
         self.dismissViewControllerAnimated(true, completion: nil)
+        delegate?.didAddDownload()
     }
 }
