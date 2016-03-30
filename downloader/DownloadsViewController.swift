@@ -12,8 +12,9 @@ import RealmSwift
 import QuickLook
 import AVKit
 import AVFoundation
+import DZNEmptyDataSet
 
-class DownloadsViewController: UITableViewController, UIPopoverPresentationControllerDelegate, QLPreviewControllerDataSource, AddViewControllerDelegate {
+class DownloadsViewController: UITableViewController, UIPopoverPresentationControllerDelegate, QLPreviewControllerDataSource, AddViewControllerDelegate, DZNEmptyDataSetSource {
 
     let realm = try! Realm()
     var token:NotificationToken?
@@ -29,7 +30,13 @@ class DownloadsViewController: UITableViewController, UIPopoverPresentationContr
         let downloadObj = downloads![indexPath.row]
         
         if let url = downloadObj.fileURL {
+            //
+            // Plays MP3 files
+            //
             if isMP3MIMEType(downloadObj.mimeType!) {
+                //
+                // Start the AVAudioSession that enables background audio playback
+                //
                 do {
                     try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
                     print("AVAudioSession Category Playback OK")
@@ -43,6 +50,9 @@ class DownloadsViewController: UITableViewController, UIPopoverPresentationContr
                     print(error.localizedDescription)
                 }
                 
+                //
+                // Present the audio file
+                //
                 let asset = AVAsset(URL: url)
                 let item = AVPlayerItem(asset: asset)
                 player = AVPlayer(playerItem: item)
@@ -52,6 +62,9 @@ class DownloadsViewController: UITableViewController, UIPopoverPresentationContr
                     self.player.play()
                 }
             }
+            //
+            // Preview file
+            //
             else if QLPreviewController.canPreviewItem(url) {
                 let previewQL = QLPreviewController()
                 previewQL.dataSource = self
@@ -73,6 +86,9 @@ class DownloadsViewController: UITableViewController, UIPopoverPresentationContr
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
+        
+        self.tableView.emptyDataSetSource = self
+        self.tableView.tableFooterView = UIView()
         
         token = realm.objects(Download).addNotificationBlock { (results, error) -> () in
             self.downloads = results
@@ -140,6 +156,10 @@ class DownloadsViewController: UITableViewController, UIPopoverPresentationContr
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             let downloadObj = downloads![indexPath.row]
+            
+            //
+            // Removes file from file system and then removes object from data store
+            //
             do {
                 if (downloadObj.fileName != nil) {
                     try NSFileManager.defaultManager().removeItemAtPath(downloadObj.fileURL!.path!)
@@ -154,8 +174,6 @@ class DownloadsViewController: UITableViewController, UIPopoverPresentationContr
             }
             downloads = realm.objects(Download)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
         }
     }
     
@@ -178,6 +196,11 @@ class DownloadsViewController: UITableViewController, UIPopoverPresentationContr
     func didAddDownload() {
         downloads = realm.objects(Download)
         tableView.reloadData()
+    }
+    
+    // MARK: - DZNEmptyDataSetSource
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString.init(string: "No Downloads")
     }
 }
 
