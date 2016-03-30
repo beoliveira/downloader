@@ -121,6 +121,7 @@ class DownloadsViewController: UITableViewController, UIPopoverPresentationContr
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         handleOpenFileForDownloadAtIndexPath(indexPath)
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {

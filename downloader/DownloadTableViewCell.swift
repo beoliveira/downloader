@@ -28,6 +28,8 @@ class DownloadTableViewCell: UITableViewCell {
 
         if download.completed {
             self.detailTextLabel?.text = "Downloaded"
+        } else {
+            self.detailTextLabel?.text = "Progress: 0% (0kb / 0kb)"
         }
         
         NSNotificationCenter.defaultCenter().addObserverForName(download.startDateString, object: nil, queue: nil) { (notification) -> Void in

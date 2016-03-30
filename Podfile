@@ -7,6 +7,7 @@ inhibit_all_warnings!
 target 'downloader' do
 	pod 'Alamofire'
     pod 'RealmSwift'
+    pod 'DZNEmptyDataSet'
 end
 
 target 'downloaderTests' do
