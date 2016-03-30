@@ -116,11 +116,15 @@ class DownloadsViewController: UITableViewController, UIPopoverPresentationContr
     // MARK: - Segues
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "popoverSegue" {
+        if segue.identifier == "addSegue" {
             let vc = segue.destinationViewController as! AddViewController
             vc.modalPresentationStyle = .Popover
             vc.popoverPresentationController?.delegate = self
             vc.delegate = self
+        } else if segue.identifier == "settingsSegue" {
+            let vc = segue.destinationViewController
+            vc.modalPresentationStyle = .Popover
+            vc.popoverPresentationController?.delegate = self
         }
     }
 
