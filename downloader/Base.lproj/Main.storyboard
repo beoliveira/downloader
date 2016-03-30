@@ -180,7 +180,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="300" height="220"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="https://dl.dropboxusercontent.com/u/2259233/An%20App%20to%20rank%20things%20for%20social%20media%20lovers.pdf" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8zz-pi-60V">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="https://upload.wikimedia.org/wikipedia/commons/f/fc/Yosemite_Valley_from_Wawona_Tunnel_view,_vista_point..JPG" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8zz-pi-60V">
                                 <rect key="frame" x="0.0" y="0.0" width="300" height="164"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="14"/>
