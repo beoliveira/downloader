@@ -97,7 +97,7 @@ class DownloadsViewController: UITableViewController, UIPopoverPresentationContr
     }
 
     override func viewWillAppear(animated: Bool) {
-        self.clearsSelectionOnViewWillAppear = self.splitViewController!.collapsed
+        self.clearsSelectionOnViewWillAppear = true
         super.viewWillAppear(animated)
         
         downloads = realm.objects(Download)

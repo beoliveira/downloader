@@ -21,20 +21,27 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             emailVC.setMessageBody(debugString, isHTML: false)
             presentViewController(emailVC, animated: true, completion: nil)
         } else {
-            // TODO: Notify users
+            let alert = UIAlertController(title: "Cannot Send Bug Report", message: "Email needs to be setup on your device in order to send the bug report. Please check your email setup in the Settings app.", preferredStyle: UIAlertControllerStyle.Alert)
+            let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
+            })
+            alert.addAction(ok)
+            presentViewController(alert, animated: true, completion: nil)
         }
     }
     
     func actionReviewOnAppStore() {
-        let url = NSURL(string: "")!
+        let url = NSURL(string: "http://www.test.com")!
         
         if UIApplication.sharedApplication().canOpenURL(url) {
             UIApplication.sharedApplication().openURL(url)
         }
     }
     
-    func shareTheApp() {
+    func actionShareTheApp() {
+        let urlString = "http://www.test.com"
+        let vc = UIActivityViewController(activityItems: [urlString], applicationActivities: [])
         
+        showViewController(vc, sender: self.parentViewController)
     }
     
     override func viewDidLoad() {
@@ -48,8 +55,22 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
+        //
+        // Handles cell taps to appropriate actions
+        //
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        if cell?.reuseIdentifier == "reportBug" {
+            actionReportBug()
+        } else if cell?.reuseIdentifier == "reviewOnAppStore" {
+            actionReviewOnAppStore()
+        } else if cell?.reuseIdentifier == "shareTheApp" {
+            actionShareTheApp()
+        }
     }
+    
+    // MARK: - MFMailComposeViewControllerDelegate
     
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         controller.dismissViewControllerAnimated(true, completion: nil)
