@@ -122,7 +122,6 @@
 				AFE6FAD31C9772BA0072BF58 /* Cells */,
 				AF63FB701C95D87A0022F0F4 /* View Controllers */,
 				502C6F431C93363000D4DA11 /* DismissSegue.swift */,
-				AF8108ED1C7D08D80065C422 /* Assets.xcassets */,
 				AF8108F21C7D08D80065C422 /* Info.plist */,
 			);
 			path = downloader;
@@ -172,6 +171,7 @@
 		AFE6FAD71C9772EA0072BF58 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				AF8108ED1C7D08D80065C422 /* Assets.xcassets */,
 				AF8108EF1C7D08D80065C422 /* LaunchScreen.storyboard */,
 				AF8108EA1C7D08D80065C422 /* Main.storyboard */,
 			);

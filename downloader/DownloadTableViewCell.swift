@@ -9,11 +9,30 @@
 import UIKit
 
 class DownloadTableViewCell: UITableViewCell {
+    
     var downloadObj: Download?
-
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var urlLabel: UILabel!
+    @IBOutlet weak var progressLabel: UILabel!
+    @IBOutlet weak var fileImageView: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    }
+    
+    func imageForMIMEType(mimeTypeString:String) -> UIImage! {
+        if mimeTypeString == "audio/mpeg" || mimeTypeString == "audio/x-mpeg-3" || mimeTypeString == "video/mpeg" || mimeTypeString == "video/x-mpeg" {
+            return UIImage(named: "mp3File")
+        } else if mimeTypeString == "application/pdf" {
+            return UIImage(named: "pdfFile")
+        } else if mimeTypeString == "image/png" {
+            return UIImage(named: "pngFile")
+        } else if mimeTypeString == "image/jpeg" || mimeTypeString == "image/pjpeg" {
+            return UIImage(named: "jpgFile")
+        }
+        
+        return UIImage(named: "blankFile")
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -23,13 +42,16 @@ class DownloadTableViewCell: UITableViewCell {
     }
     
     func setDownload(download:Download){
-        self.textLabel?.text = download.urlString
+        self.urlLabel.text = download.urlString
         downloadObj = download
 
         if download.completed {
-            self.detailTextLabel?.text = "Downloaded"
+            self.progressLabel?.text = "Downloaded"
+            self.titleLabel.text = download.fileName
+            self.fileImageView.image = imageForMIMEType(download.mimeType!)
         } else {
-            self.detailTextLabel?.text = "Progress: 0% (0kb / 0kb)"
+            self.progressLabel?.text = "Progress: 0% (0kb / 0kb)"
+            self.titleLabel.text = "Downloading... ⬇️"
         }
         
         NSNotificationCenter.defaultCenter().addObserverForName(download.startDateString, object: nil, queue: nil) { (notification) -> Void in
@@ -50,7 +72,7 @@ class DownloadTableViewCell: UITableViewCell {
                 let formatter = NSByteCountFormatter()
                 let formattedFileSize = formatter.stringFromByteCount(totalBytesExpectedToRead!)
                 
-                self.detailTextLabel?.text = String(format: "Progress: %lld%% (%@ / %@)", progressValue.longLongValue, formatter.stringFromByteCount(totalBytes!), formattedFileSize)
+                self.progressLabel?.text = String(format: "Progress: %lld%% (%@ / %@)", progressValue.longLongValue, formatter.stringFromByteCount(totalBytes!), formattedFileSize)
             }
         }
     }

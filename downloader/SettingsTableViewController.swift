@@ -37,13 +37,6 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         }
     }
     
-    func actionShareTheApp() {
-        let urlString = "http://www.test.com"
-        let vc = UIActivityViewController(activityItems: [urlString], applicationActivities: [])
-        
-        showViewController(vc, sender: self.parentViewController)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.clearsSelectionOnViewWillAppear = false
@@ -65,8 +58,6 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             actionReportBug()
         } else if cell?.reuseIdentifier == "reviewOnAppStore" {
             actionReviewOnAppStore()
-        } else if cell?.reuseIdentifier == "shareTheApp" {
-            actionShareTheApp()
         }
     }
     

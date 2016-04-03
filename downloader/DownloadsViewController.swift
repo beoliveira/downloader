@@ -97,7 +97,6 @@ class DownloadsViewController: UITableViewController, UIPopoverPresentationContr
     }
 
     override func viewWillAppear(animated: Bool) {
-        self.clearsSelectionOnViewWillAppear = true
         super.viewWillAppear(animated)
         
         downloads = realm.objects(Download)
@@ -142,7 +141,7 @@ class DownloadsViewController: UITableViewController, UIPopoverPresentationContr
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! DownloadTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("DownloadCell", forIndexPath: indexPath) as! DownloadTableViewCell
         cell.setDownload(downloads![indexPath.row])
         return cell
     }
