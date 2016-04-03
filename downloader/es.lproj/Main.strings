@@ -6,10 +6,10 @@
 "8zz-pi-60V.text" = "https://upload.wikimedia.org/wikipedia/commons/f/fc/Yosemite_Valley_from_Wawona_Tunnel_view,_vista_point..JPG";
 
 /* Class = "UILabel"; text = "Review on the App Store"; ObjectID = "MkF-CZ-IKR"; */
-"MkF-CZ-IKR.text" = "Review on the App Store";
+"MkF-CZ-IKR.text" = "Revisar en App Store";
 
 /* Class = "UIButton"; normalTitle = "Add"; ObjectID = "Nby-D9-mhd"; */
-"Nby-D9-mhd.normalTitle" = "Add";
+"Nby-D9-mhd.normalTitle" = "Añadir";
 
 /* Class = "UINavigationController"; title = "Master"; ObjectID = "RMx-3f-FxP"; */
 "RMx-3f-FxP.title" = "Master";
@@ -18,16 +18,16 @@
 "Wnj-PA-uQu.text" = "Yosemite_Valley_from_Wawona_Tunnel_view,_vista_point..JPG";
 
 /* Class = "UINavigationItem"; title = "Downloads"; ObjectID = "Zdf-7t-Un8"; */
-"Zdf-7t-Un8.title" = "Downloads";
+"Zdf-7t-Un8.title" = "Descargas";
 
 /* Class = "UIButton"; normalTitle = "Clear"; ObjectID = "cdl-u9-jQ9"; */
-"cdl-u9-jQ9.normalTitle" = "Clear";
+"cdl-u9-jQ9.normalTitle" = "Limpiar";
 
 /* Class = "UILabel"; text = "Progress: 0% (0kb / 0kb)"; ObjectID = "jsW-4P-L9m"; */
-"jsW-4P-L9m.text" = "Progress: 0% (0kb / 0kb)";
+"jsW-4P-L9m.text" = "Progreso: 0% (0kb / 0kb)";
 
 /* Class = "UILabel"; text = "https://upload.wikimedia.org/wikipedia/commons/f/fc/Yosemite_Valley_from_Wawona_Tunnel_view,_vista_point..JPG"; ObjectID = "rgh-vW-J8j"; */
 "rgh-vW-J8j.text" = "https://upload.wikimedia.org/wikipedia/commons/f/fc/Yosemite_Valley_from_Wawona_Tunnel_view,_vista_point..JPG";
 
 /* Class = "UILabel"; text = "Report Bug"; ObjectID = "s69-Ue-YOs"; */
-"s69-Ue-YOs.text" = "Report Bug";
+"s69-Ue-YOs.text" = "Reportar un Error";
