@@ -37,6 +37,10 @@
 		502C6F451C93390600D4DA11 /* DownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
 		86605BB61FE521D1D20AB91D /* Pods-downloader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-downloader.debug.xcconfig"; path = "Pods/Target Support Files/Pods-downloader/Pods-downloader.debug.xcconfig"; sourceTree = "<group>"; };
 		9B296DFCF6DEE689B76E4AEC /* Pods_downloader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_downloader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF3756B71CB1C21600331293 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		AF3756B81CB1C21600331293 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
+		AF3756B91CB1C25000331293 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		AF3756BA1CB1C25000331293 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
 		AF63FB6E1C95D7830022F0F4 /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		AF63FB741C95DF4D0022F0F4 /* DownloadTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTableViewCell.swift; sourceTree = "<group>"; };
 		AF8108E11C7D08D80065C422 /* downloader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = downloader.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -373,6 +377,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				AF8108EB1C7D08D80065C422 /* Base */,
+				AF3756B81CB1C21600331293 /* es */,
+				AF3756BA1CB1C25000331293 /* pt-BR */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -381,6 +387,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				AF8108F01C7D08D80065C422 /* Base */,
+				AF3756B71CB1C21600331293 /* es */,
+				AF3756B91CB1C25000331293 /* pt-BR */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
