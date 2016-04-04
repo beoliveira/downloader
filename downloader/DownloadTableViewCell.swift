@@ -45,7 +45,7 @@ class DownloadTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setupInterfaceForDownload(download:Download) {
+    func setupInterfaceForDownload(download:Download, checkProgress:Bool) {
         urlLabel.text = download.urlString
         
         //
@@ -65,8 +65,14 @@ class DownloadTableViewCell: UITableViewCell {
             
             fileImageView.image = imageForMIMEType(download.mimeType!)
         } else {
-            progressLabel?.text = NSLocalizedString("downloads.ProgressPlaceholder", comment: "")
+            if checkProgress == true {
+                progressLabel?.text = NSLocalizedString("downloads.ProgressPlaceholder", comment: "")
+            }
             titleLabel.text = NSLocalizedString("downloads.Downloading", comment: "")
+            //
+            // We don't know the mime type at this point, display blank file
+            //
+            fileImageView.image = imageForMIMEType("")
         }
     }
     
@@ -88,8 +94,6 @@ class DownloadTableViewCell: UITableViewCell {
             }
         }
         
-        setupInterfaceForDownload(downloadObj!)
-        
         let totalBytes = userInfo!["totalBytes"]?.longLongValue
         let totalBytesExpectedToRead = userInfo!["totalBytesExpectedToRead"]?.longLongValue
         
@@ -107,12 +111,14 @@ class DownloadTableViewCell: UITableViewCell {
                 progressLabel?.text = String(format: NSLocalizedString("downloads.Progress", comment: ""), progressValue.longLongValue, formattedTotalBytes, formattedFileSize)
             }
         }
+        
+        setupInterfaceForDownload(downloadObj!, checkProgress: false)
     }
     
     func setDownload(download:Download){
         downloadObj = download
         
-        setupInterfaceForDownload(download)
+        setupInterfaceForDownload(download, checkProgress: true)
         
         //
         // Listens to notifications for downloads with that start date
