@@ -72,7 +72,9 @@ class DownloadsViewController: UITableViewController, UIPopoverPresentationContr
                 showViewController(previewQL, sender: self)
             }
         } else {
-            let alert = UIAlertController(title: "Download In Progress", message: "File is still downloading", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: NSLocalizedString("downloads.DownloadInProgressAlertTitle", comment: ""),
+                                          message: NSLocalizedString("downloads.DownloadInProgressAlertMessage", comment: ""),
+                                          preferredStyle: UIAlertControllerStyle.Alert)
             let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
             })
             alert.addAction(ok)
@@ -203,7 +205,7 @@ class DownloadsViewController: UITableViewController, UIPopoverPresentationContr
     
     // MARK: - DZNEmptyDataSetSource
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        return NSAttributedString.init(string: "No Downloads")
+        return NSAttributedString.init(string: NSLocalizedString("downloads.NoDownloads", comment: ""))
     }
 }
 

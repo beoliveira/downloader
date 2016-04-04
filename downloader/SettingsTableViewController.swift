@@ -21,7 +21,9 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             emailVC.setMessageBody(debugString, isHTML: false)
             presentViewController(emailVC, animated: true, completion: nil)
         } else {
-            let alert = UIAlertController(title: "Cannot Send Bug Report", message: "Email needs to be setup on your device in order to send the bug report. Please check your email setup in the Settings app.", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: NSLocalizedString("settings.EmailErrorAlertTitle", comment: ""),
+                                          message: NSLocalizedString("settings.EmailErrorAlertMessage", comment: ""),
+                                          preferredStyle: UIAlertControllerStyle.Alert)
             let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
             })
             alert.addAction(ok)

@@ -1,0 +1,18 @@
+/* 
+  Localizable.strings
+  downloader
+
+  Created by Thiago Peres on 04/04/16.
+  Copyright © 2016 peres. All rights reserved.
+*/
+"downloads.Downloaded" = "Downloaded";
+"downloads.Downloading" = "Downloading... ⬇️";
+"downloads.ProgressPlaceholder" = "Progress: 0% (0kb / 0kb)";
+"downloads.Progress" = "Progress: %lld%% (%@ / %@)";
+"downloads.NoDownloads" = "No Downloads";
+"downloads.DownloadInProgressAlertTitle" = "Download In Progress";
+"downloads.DownloadInProgressAlertMessage" = "File is still downloading.";
+
+"settings.Subject" = "Bug Report";
+"settings.EmailErrorAlertTitle" = "Cannot Send Bug Report";
+"settings.EmailErrorAlertMessage" = "Email needs to be setup on your device in order to send the bug report. Please check your email setup in the Settings app.";

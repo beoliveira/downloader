@@ -46,12 +46,12 @@ class DownloadTableViewCell: UITableViewCell {
         downloadObj = download
 
         if download.completed {
-            self.progressLabel?.text = "Downloaded"
+            self.progressLabel?.text = NSLocalizedString("downloads.Downloaded", comment: "")
             self.titleLabel.text = download.formattedFileName
             self.fileImageView.image = imageForMIMEType(download.mimeType!)
         } else {
-            self.progressLabel?.text = "Progress: 0% (0kb / 0kb)"
-            self.titleLabel.text = "Downloading... ⬇️"
+            self.progressLabel?.text = NSLocalizedString("downloads.ProgressPlaceholder", comment: "")
+            self.titleLabel.text = NSLocalizedString("downloads.Downloading", comment: "")
         }
         
         NSNotificationCenter.defaultCenter().addObserverForName(download.startDateString, object: nil, queue: nil) { (notification) -> Void in
@@ -72,7 +72,7 @@ class DownloadTableViewCell: UITableViewCell {
                 let formatter = NSByteCountFormatter()
                 let formattedFileSize = formatter.stringFromByteCount(totalBytesExpectedToRead!)
                 
-                self.progressLabel?.text = String(format: "Progress: %lld%% (%@ / %@)", progressValue.longLongValue, formatter.stringFromByteCount(totalBytes!), formattedFileSize)
+                self.progressLabel?.text = String(format: NSLocalizedString("downloads.Progress", comment: ""), progressValue.longLongValue, formatter.stringFromByteCount(totalBytes!), formattedFileSize)
             }
         }
     }
