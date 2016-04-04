@@ -10,7 +10,6 @@
 		502C6F441C93363000D4DA11 /* DismissSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502C6F431C93363000D4DA11 /* DismissSegue.swift */; };
 		502C6F461C93390600D4DA11 /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502C6F451C93390600D4DA11 /* DownloadManager.swift */; };
 		505BF7BA1CB264240074E8C2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 505BF7BC1CB264240074E8C2 /* Localizable.strings */; };
-		505BF7C11CB27CF20074E8C2 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 505BF7C01CB27CF20074E8C2 /* Info.plist */; };
 		505BF7C41CB27D8B0074E8C2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 505BF7C61CB27D8B0074E8C2 /* InfoPlist.strings */; };
 		9B5B816E538B1A48B103310F /* Pods_downloader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B296DFCF6DEE689B76E4AEC /* Pods_downloader.framework */; };
 		AF63FB6F1C95D7830022F0F4 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF63FB6E1C95D7830022F0F4 /* AddViewController.swift */; };
@@ -249,7 +248,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = peres;
 				TargetAttributes = {
 					AF8108E01C7D08D80065C422 = {
@@ -297,7 +296,6 @@
 				505BF7C41CB27D8B0074E8C2 /* InfoPlist.strings in Resources */,
 				505BF7BA1CB264240074E8C2 /* Localizable.strings in Resources */,
 				AF8108EE1C7D08D80065C422 /* Assets.xcassets in Resources */,
-				505BF7C11CB27CF20074E8C2 /* Info.plist in Resources */,
 				AF8108EC1C7D08D80065C422 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
