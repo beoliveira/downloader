@@ -74,7 +74,14 @@ class DownloadManager: NSObject {
                     try! self.realm.write {
                         downloadObj.fileName = self.filenameForResponse(response!)
                         downloadObj.mimeType = response!.MIMEType
+                        downloadObj.suggestedFilename = response!.suggestedFilename
                     }
+                    
+                    NSNotificationCenter.defaultCenter().postNotificationName(downloadObj.startDateString, object: self, userInfo: [
+                        "progress":NSNumber(float: 100),
+                        "totalBytes":NSNumber(longLong: 0),
+                        "totalBytesExpectedToRead":NSNumber(longLong: 0),
+                        "downloadObj":downloadObj])
                 }
                 if let
                     data = data,

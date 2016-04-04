@@ -45,67 +45,81 @@ class DownloadTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setDownload(download:Download){
-        self.urlLabel.text = download.urlString
-        downloadObj = download
-
+    func setupInterfaceForDownload(download:Download) {
+        urlLabel.text = download.urlString
+        
         //
         // Handles display for download state
         //
         if download.completed {
-            self.progressLabel?.text = NSLocalizedString("downloads.Downloaded", comment: "")
+            progressLabel?.text = NSLocalizedString("downloads.Downloaded", comment: "")
             
             //
             // Handles files with no filename added
             //
-            if download.formattedFileName?.characters.count > 0 {
-                self.titleLabel.text = download.formattedFileName
+            if download.suggestedFilename?.characters.count > 0 {
+                titleLabel.text = download.suggestedFilename
             } else {
-                self.titleLabel.text = NSLocalizedString("downloads.NoFileTitleText", comment: "")
+                titleLabel.text = NSLocalizedString("downloads.NoFileTitleText", comment: "")
             }
             
-            self.fileImageView.image = imageForMIMEType(download.mimeType!)
+            fileImageView.image = imageForMIMEType(download.mimeType!)
         } else {
-            self.progressLabel?.text = NSLocalizedString("downloads.ProgressPlaceholder", comment: "")
-            self.titleLabel.text = NSLocalizedString("downloads.Downloading", comment: "")
+            progressLabel?.text = NSLocalizedString("downloads.ProgressPlaceholder", comment: "")
+            titleLabel.text = NSLocalizedString("downloads.Downloading", comment: "")
         }
+    }
+    
+    func setupInterfaceForProgressUpdate(userInfo:Dictionary<NSObject, AnyObject>?) {
+        if userInfo == nil {
+            return
+        }
+        
+        let progressValue = userInfo!["progress"] as! NSNumber
+        let receivedDonwloadObj:Download = userInfo!["downloadObj"] as! Download
+        
+        //
+        // Don't do anything if any of the objects have
+        // invalidated in the datastore
+        //
+        if let dobj = downloadObj {
+            if receivedDonwloadObj.invalidated || dobj.invalidated {
+                return
+            }
+        }
+        
+        setupInterfaceForDownload(downloadObj!)
+        
+        let totalBytes = userInfo!["totalBytes"]?.longLongValue
+        let totalBytesExpectedToRead = userInfo!["totalBytesExpectedToRead"]?.longLongValue
+        
+        if receivedDonwloadObj.startDate.compare((downloadObj?.startDate)!) == NSComparisonResult.OrderedSame {
+            let formatter = NSByteCountFormatter()
+            let formattedFileSize = formatter.stringFromByteCount(totalBytesExpectedToRead!)
+            let formattedTotalBytes = formatter.stringFromByteCount(totalBytes!)
+            
+            //
+            // Handles cases where the expected bytes to read (and progress) is not known
+            //
+            if totalBytesExpectedToRead <= 0 || progressValue.longLongValue <= 0 {
+                progressLabel.text = String(format: NSLocalizedString("downloads.ProgressSimplified", comment: ""), formattedTotalBytes)
+            } else {
+                progressLabel?.text = String(format: NSLocalizedString("downloads.Progress", comment: ""), progressValue.longLongValue, formattedTotalBytes, formattedFileSize)
+            }
+        }
+    }
+    
+    func setDownload(download:Download){
+        downloadObj = download
+        
+        setupInterfaceForDownload(download)
         
         //
         // Listens to notifications for downloads with that start date
         // to update the cell with download progress
         //
         NSNotificationCenter.defaultCenter().addObserverForName(download.startDateString, object: nil, queue: nil) { (notification) -> Void in
-            let userInfo = notification.userInfo
-            let progressValue = userInfo!["progress"] as! NSNumber
-            let receivedDonwloadObj:Download = userInfo!["downloadObj"] as! Download
-            
-            //
-            // Don't do anything if any of the objects have
-            // invalidated in the datastore
-            //
-            if let dobj = self.downloadObj {
-                if receivedDonwloadObj.invalidated || dobj.invalidated {
-                    return
-                }
-            }
-            
-            let totalBytes = userInfo!["totalBytes"]?.longLongValue
-            let totalBytesExpectedToRead = userInfo!["totalBytesExpectedToRead"]?.longLongValue
-            
-            if receivedDonwloadObj.startDate.compare((self.downloadObj?.startDate)!) == NSComparisonResult.OrderedSame {
-                let formatter = NSByteCountFormatter()
-                let formattedFileSize = formatter.stringFromByteCount(totalBytesExpectedToRead!)
-                let formattedTotalBytes = formatter.stringFromByteCount(totalBytes!)
-                
-                //
-                // Handles cases where the expected bytes to read (and progress) is not known
-                //
-                if totalBytesExpectedToRead <= 0 || progressValue.longLongValue <= 0 {
-                    self.progressLabel.text = String(format: NSLocalizedString("downloads.ProgressSimplified", comment: ""), formattedTotalBytes)
-                } else {
-                    self.progressLabel?.text = String(format: NSLocalizedString("downloads.Progress", comment: ""), progressValue.longLongValue, formattedTotalBytes, formattedFileSize)
-                }
-            }
+            self.setupInterfaceForProgressUpdate(notification.userInfo)
         }
     }
 }

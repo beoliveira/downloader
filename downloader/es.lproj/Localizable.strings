@@ -10,6 +10,7 @@
 "downloads.ProgressPlaceholder" = "Progreso: 0% (0kb / 0kb)";
 "downloads.Progress" = "Progreso: %lld%% (%@ / %@)";
 "downloads.ProgressSimplified" = "Progreso: %@";
+"downloads.NoFileTitleText" = "Archivo";
 "downloads.NoDownloads" = "No Hay Descargas";
 "downloads.DownloadInProgressAlertTitle" = "Descarga En Progreso";
 "downloads.DownloadInProgressAlertMessage" = "Archivo todavía está descargando.";

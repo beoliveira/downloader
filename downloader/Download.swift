@@ -12,18 +12,13 @@ import RealmSwift
 class Download: Object {
     dynamic var startDate = NSDate()
     dynamic var urlString = ""
+    dynamic var suggestedFilename: String? = nil
     dynamic var fileName: String? = nil
     dynamic var mimeType: String? = nil
     
     var startDateString:String {
         get {
             return NSDateFormatter.localizedStringFromDate(self.startDate, dateStyle: .FullStyle, timeStyle: .FullStyle)
-        }
-    }
-    
-    var formattedFileName: String? {
-        get {
-            return self.fileName == nil ? nil : self.fileName?.componentsSeparatedByString(",").first
         }
     }
     
