@@ -21,6 +21,12 @@ class Download: Object {
         }
     }
     
+    var formattedFileName: String? {
+        get {
+            return self.fileName == nil ? nil : self.fileName?.componentsSeparatedByString(",").first
+        }
+    }
+    
     var completed:Bool {
         get {
             return self.fileName != nil

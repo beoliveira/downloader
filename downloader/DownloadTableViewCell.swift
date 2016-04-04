@@ -47,7 +47,7 @@ class DownloadTableViewCell: UITableViewCell {
 
         if download.completed {
             self.progressLabel?.text = "Downloaded"
-            self.titleLabel.text = download.fileName
+            self.titleLabel.text = download.formattedFileName
             self.fileImageView.image = imageForMIMEType(download.mimeType!)
         } else {
             self.progressLabel?.text = "Progress: 0% (0kb / 0kb)"
