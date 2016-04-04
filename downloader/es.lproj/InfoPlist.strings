@@ -1,0 +1,8 @@
+/* 
+  InfoPlist.strings
+  downloader
+
+  Created by Thiago Peres on 04/04/16.
+  Copyright © 2016 peres. All rights reserved.
+*/
+"CFBundleDisplayName" = "Descargas";
