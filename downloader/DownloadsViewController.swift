@@ -109,11 +109,6 @@ class DownloadsViewController: UITableViewController, UIPopoverPresentationContr
         token!.stop()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     // MARK: - Segues
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

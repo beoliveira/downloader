@@ -9,6 +9,7 @@
 "downloads.Downloading" = "Baixando... ⬇️";
 "downloads.ProgressPlaceholder" = "Progresso: 0% (0kb / 0kb)";
 "downloads.Progress" = "Progresso: %lld%% (%@ / %@)";
+"downloads.ProgressSimplified" = "Progresso: %@";
 "downloads.NoDownloads" = "Não Há Downloads";
 "downloads.DownloadInProgressAlertTitle" = "Download Em Progresso";
 "downloads.DownloadInProgressAlertMessage" = "O arquivo ainda está sendo baixado.";
