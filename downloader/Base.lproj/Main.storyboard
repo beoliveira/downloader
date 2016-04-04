@@ -238,4 +238,5 @@
         <image name="blankFile" width="333" height="459"/>
         <image name="settingsIcon" width="23" height="23"/>
     </resources>
+    <color key="tintColor" red="0.28103850376151779" green="0.29058598002789615" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
 </document>
