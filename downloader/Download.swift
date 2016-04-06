@@ -30,13 +30,14 @@ class Download: Object {
     
     var fileURL:NSURL? {
         get {
-            if self.fileName == nil {
+            guard let filename = self.fileName else {
                 return nil
             }
+            guard let documentDirectoryUrl = NSFileManager.documentDirectoryUrl() else {
+                return nil;
+            }
             
-            let directoryURLs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-            
-            return directoryURLs[0].URLByAppendingPathComponent(self.fileName!)
+            return documentDirectoryUrl.URLByAppendingPathComponent(filename)
         }
     }
 }
