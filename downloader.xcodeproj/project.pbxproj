@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49F2E8F51CB599CA00D7BE49 /* NSFileManager+DocumentDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F2E8F41CB599CA00D7BE49 /* NSFileManager+DocumentDirectory.swift */; };
+		49F2E8F81CB59B7600D7BE49 /* DownloadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F2E8F71CB59B7600D7BE49 /* DownloadTests.swift */; };
 		502C6F461C93390600D4DA11 /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502C6F451C93390600D4DA11 /* DownloadManager.swift */; };
 		505BF7BA1CB264240074E8C2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 505BF7BC1CB264240074E8C2 /* Localizable.strings */; };
 		505BF7C41CB27D8B0074E8C2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 505BF7C61CB27D8B0074E8C2 /* InfoPlist.strings */; };
@@ -34,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		49F2E8F41CB599CA00D7BE49 /* NSFileManager+DocumentDirectory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSFileManager+DocumentDirectory.swift"; sourceTree = "<group>"; };
+		49F2E8F71CB59B7600D7BE49 /* DownloadTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTests.swift; sourceTree = "<group>"; };
 		502C6F451C93390600D4DA11 /* DownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
 		505BF7BB1CB264240074E8C2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		505BF7BD1CB264260074E8C2 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -83,6 +87,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		49F2E8F31CB5996D00D7BE49 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				49F2E8F41CB599CA00D7BE49 /* NSFileManager+DocumentDirectory.swift */,
+			);
+			path = common;
+			sourceTree = "<group>";
+		};
+		49F2E8F61CB59B5D00D7BE49 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				49F2E8F71CB59B7600D7BE49 /* DownloadTests.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		73C7A00475719A1681977AA9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -125,6 +145,7 @@
 		AF8108E31C7D08D80065C422 /* downloader */ = {
 			isa = PBXGroup;
 			children = (
+				49F2E8F31CB5996D00D7BE49 /* common */,
 				505BF7C01CB27CF20074E8C2 /* Info.plist */,
 				AFE6FAD71C9772EA0072BF58 /* UI */,
 				AFE6FAD61C9772E30072BF58 /* App Delegate */,
@@ -140,6 +161,7 @@
 		AF8108FA1C7D08D80065C422 /* downloaderTests */ = {
 			isa = PBXGroup;
 			children = (
+				49F2E8F61CB59B5D00D7BE49 /* Models */,
 				AF8108FB1C7D08D80065C422 /* downloaderTests.swift */,
 				AF8108FD1C7D08D80065C422 /* Info.plist */,
 			);
@@ -362,6 +384,7 @@
 				AF63FB751C95DF4D0022F0F4 /* DownloadTableViewCell.swift in Sources */,
 				502C6F461C93390600D4DA11 /* DownloadManager.swift in Sources */,
 				AF63FB6F1C95D7830022F0F4 /* AddViewController.swift in Sources */,
+				49F2E8F51CB599CA00D7BE49 /* NSFileManager+DocumentDirectory.swift in Sources */,
 				AF8108E71C7D08D80065C422 /* DownloadsViewController.swift in Sources */,
 				AFA21C5E1CAC7F84002F70F4 /* SettingsTableViewController.swift in Sources */,
 				AF8108E51C7D08D80065C422 /* AppDelegate.swift in Sources */,
@@ -374,6 +397,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF8108FC1C7D08D80065C422 /* downloaderTests.swift in Sources */,
+				49F2E8F81CB59B7600D7BE49 /* DownloadTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
