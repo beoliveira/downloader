@@ -1,1 +1,3 @@
 language: objective-c
+xcode_workspace: downloader.xcworkspace
+xcode_scheme: downloaderTests
