@@ -1,10 +1,5 @@
 language: objective-c
 
 script:
-  xctool
-  -workspace downloader.xcworkspace
-  -scheme downloaderTests
-  build 
-  test
-  CODE_SIGN_IDENTITY=""
-  CODE_SIGNING_REQUIRED=NO
+  - xctool -workspace downloader.xcworkspace -scheme downloader -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+  - xctool test -workspace downloader.xcworkspace -scheme downloaderTests -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
