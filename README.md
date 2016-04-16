@@ -1,5 +1,7 @@
 # downloader, an exercise in minimalism and simplicity
 
+[![Build Status](https://travis-ci.org/thiagoperes/downloader.svg?branch=master)](https://travis-ci.org/thiagoperes/downloader)
+
 Downloader is an app for iOS that aims to bring a missing but important functionality to iOS: Downloading things. Unfortunately, the App Store is filled with options that try to take advantage of this necessity, but that exploit it with ads and deliver a horrible experience.
 
 Therefore the goal of this project is to create a simple app that downloads things, with the following constraints:
