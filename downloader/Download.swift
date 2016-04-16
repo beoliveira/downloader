@@ -21,7 +21,6 @@ class Download: Object {
     var startDateString:String {
         get {
             return Download.dateFormater.stringFromDate(self.startDate)
-//                NSDateFormatter.localizedStringFromDate(self.startDate, dateStyle: .FullStyle, timeStyle: .FullStyle)
         }
     }
     
