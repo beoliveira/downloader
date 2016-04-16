@@ -16,9 +16,12 @@ class Download: Object {
     dynamic var fileName: String? = nil
     dynamic var mimeType: String? = nil
     
+    static let dateFormater = Download.createDateStringFormatter("EEEE, MMMM d, yyyy - h:mm:ss a") // http://www.codingexplorer.com/swiftly-getting-human-readable-date-nsdateformatter/
+    
     var startDateString:String {
         get {
-            return NSDateFormatter.localizedStringFromDate(self.startDate, dateStyle: .FullStyle, timeStyle: .FullStyle)
+            return Download.dateFormater.stringFromDate(self.startDate)
+//                NSDateFormatter.localizedStringFromDate(self.startDate, dateStyle: .FullStyle, timeStyle: .FullStyle)
         }
     }
     
@@ -39,5 +42,16 @@ class Download: Object {
             
             return documentDirectoryUrl.URLByAppendingPathComponent(filename)
         }
+    }
+}
+
+extension Download /* Date Formatter */ {
+    
+    static func createDateStringFormatter(format: String) -> NSDateFormatter {
+        let
+        formatter = NSDateFormatter()
+        formatter.dateFormat = format
+        formatter.locale = NSLocale.currentLocale()
+        return formatter
     }
 }

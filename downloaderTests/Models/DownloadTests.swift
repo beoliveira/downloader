@@ -17,7 +17,7 @@ class DownloadTests: XCTestCase {
     {
         let download = createDownloadWithStartDate(NSDate(timeIntervalSince1970: 1000))
         
-        XCTAssertEqual("Thursday, January 1, 1970 at 1:16:40 AM Central European Standard Time", download.startDateString)
+        XCTAssertEqual("Thursday, January 1, 1970 - 1:16:40 AM", download.startDateString)
     }
     
     func testCompletedFalse()
