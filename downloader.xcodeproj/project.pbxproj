@@ -283,7 +283,7 @@
 				TargetAttributes = {
 					AF8108E01C7D08D80065C422 = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = WZCH8LX875;
+						DevelopmentTeam = 7NLP79V366;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -559,7 +559,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = peres.downloader;
+				PRODUCT_BUNDLE_IDENTIFIER = peres.downloader.cu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -574,7 +574,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = peres.downloader;
+				PRODUCT_BUNDLE_IDENTIFIER = peres.downloader.cu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

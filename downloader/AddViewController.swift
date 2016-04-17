@@ -17,6 +17,20 @@ class AddViewController: UIViewController {
     @IBOutlet weak var textView: UITextView!
     weak var delegate:AddViewControllerDelegate?
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        //
+        // Check if there's an URL present in pasteboard and
+        // adds it to the pasteboard
+        //
+        if let pasteboardURLString = UIPasteboard.generalPasteboard().string {
+            if pasteboardURLString.containsString("http") {
+                self.textView.text = pasteboardURLString
+            }
+        }
+    }
+    
     @IBAction func clearButtonPressed(sender: AnyObject) {
         self.textView.text = ""
         self.textView.becomeFirstResponder()
