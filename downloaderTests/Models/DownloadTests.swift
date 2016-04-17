@@ -15,9 +15,13 @@ class DownloadTests: XCTestCase {
     
     func testStartDateString()
     {
-        let download = createDownloadWithStartDate(NSDate(timeIntervalSince1970: 1000))
+        // setting expected locale and timezone
+        Download.dateFormater.locale   = NSLocale(localeIdentifier: "en");
+        Download.dateFormater.timeZone = NSTimeZone(abbreviation: "GMT")
         
-        XCTAssertEqual("Thursday, January 1, 1970 at 1:16:40 AM Central European Standard Time", download.startDateString)
+        let download = createDownloadWithStartDate(NSDate(timeIntervalSince1970: 1000))
+
+        XCTAssertEqual("Thursday, January 1, 1970 - 12:16:40 AM", download.startDateString)
     }
     
     func testCompletedFalse()

@@ -21,24 +21,6 @@ class DownloadTableViewCell: UITableViewCell {
         // Initialization code
     }
     
-    //
-    // Returns an UIImage instance containing the icon for the
-    // corresponding MIME type string
-    //
-    func imageForMIMEType(mimeTypeString:String) -> UIImage! {
-        if mimeTypeString == "audio/mpeg" || mimeTypeString == "audio/x-mpeg-3" || mimeTypeString == "video/mpeg" || mimeTypeString == "video/x-mpeg" {
-            return UIImage(named: "mp3File")
-        } else if mimeTypeString == "application/pdf" {
-            return UIImage(named: "pdfFile")
-        } else if mimeTypeString == "image/png" {
-            return UIImage(named: "pngFile")
-        } else if mimeTypeString == "image/jpeg" || mimeTypeString == "image/pjpeg" {
-            return UIImage(named: "jpgFile")
-        }
-        
-        return UIImage(named: "blankFile")
-    }
-
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
@@ -126,6 +108,37 @@ class DownloadTableViewCell: UITableViewCell {
         //
         NSNotificationCenter.defaultCenter().addObserverForName(download.startDateString, object: nil, queue: nil) { (notification) -> Void in
             self.setupInterfaceForProgressUpdate(notification.userInfo)
+        }
+    }
+}
+
+extension DownloadTableViewCell /* MIME Type -> Image */ {
+    //
+    // Returns an UIImage instance containing the icon for the
+    // corresponding MIME type string
+    //
+    func imageForMIMEType(mimeTypeString:String) -> UIImage! {
+        
+        switch mimeTypeString
+        {
+        case "audio/mpeg":     fallthrough
+        case "audio/x-mpeg-3": fallthrough
+        case "video/mpeg":     fallthrough
+        case "video/x-mpeg":
+            return UIImage(named: "mp3File")
+            
+        case "application/pdf":
+            return UIImage(named: "pdfFile")
+            
+        case "image/png":
+            return UIImage(named: "pngFile")
+            
+        case "image/jpeg": fallthrough
+        case "image/pjpeg":
+            return UIImage(named: "jpgFile")
+            
+        default:
+            return UIImage(named: "blankFile")
         }
     }
 }
