@@ -813,13 +813,13 @@
 				LastUpgradeCheck = 0700;
 				TargetAttributes = {
 					0543D05404C2EF1E34301D23CF0E2204 = {
-						DevelopmentTeam = 7NLP79V366;
+						DevelopmentTeam = WZCH8LX875;
 					};
 					16FB872D0D2D4BA0F378AB34D47CF95F = {
-						DevelopmentTeam = 7NLP79V366;
+						DevelopmentTeam = WZCH8LX875;
 					};
 					79C040AFDDCE1BCBF6D8B5EB0B85887F = {
-						DevelopmentTeam = 7NLP79V366;
+						DevelopmentTeam = WZCH8LX875;
 					};
 				};
 			};
